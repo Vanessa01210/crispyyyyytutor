@@ -30,7 +30,7 @@ body{margin:0;color:var(--ink);font-family:var(--hand);font-size:17px;line-heigh
 a{color:inherit}
 img{max-width:100%;display:block}
 .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
-button{font-family:inherit}
+button{font-family:inherit;color:var(--ink)}
 
 /* ---------- header ---------- */
 header{position:sticky;top:0;z-index:20;background:rgba(251,244,234,.94);backdrop-filter:blur(6px);border-bottom:2px dashed var(--line)}
@@ -250,6 +250,22 @@ footer a{margin:0 8px}
 .mini-story{margin-top:18px;background:var(--card);border:2px dashed var(--honey);border-radius:20px;padding:16px 18px;font-size:16px}
 .mini-story b{font-weight:400;color:var(--pink-dark)}
 
+
+.step{display:flex;flex-direction:column;align-items:center;gap:6px}
+.step-label{font-size:14px;color:var(--muted)}
+.filters{gap:16px}
+.seg{display:inline-flex;background:var(--card);border:2px solid var(--line);border-radius:99px;padding:3px}
+.seg button{border:0;background:none;padding:4px 24px;border-radius:99px;font-size:17px;cursor:pointer}
+.seg button.active{background:var(--pink);color:#fff}
+.seg button .n{font-size:12px;opacity:.75;margin-left:3px}
+.crumb{text-align:center;margin:0 0 6px;font-size:18px}
+.crumb span{color:var(--muted);font-size:15px}
+.subj-sec{margin-top:30px}
+.subj-head{display:flex;align-items:center;gap:10px;font-size:23px;margin:0 0 16px;font-weight:400}
+.subj-head .dot{width:12px;height:12px;border-radius:50%;background:var(--sage)}
+.subj-head small{font-size:14px;color:var(--muted)}
+.subj-head::after{content:"";flex:1;border-top:2px dashed var(--line)}
+
 /* ---------- cart & modal ---------- */
 .cart-fab{position:fixed;right:18px;bottom:18px;z-index:30;background:var(--pink);color:#fff;border:2px solid var(--pink-dark);border-radius:99px;padding:12px 20px;font-size:17px;box-shadow:3px 4px 0 var(--pink-dark);cursor:pointer;display:none}
 .cart-fab.show{display:flex;gap:8px;align-items:center}
@@ -273,7 +289,7 @@ footer a{margin:0 8px}
 .bank dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
 .bank dt{color:var(--muted)}
 .bank dd{margin:0}
-.copy{margin-left:8px;font-size:13px;padding:0 10px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer}
+.copy{margin-left:8px;font-size:13px;color:var(--ink);font-weight:600;padding:0 10px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer}
 .notice{font-size:15px;color:var(--muted);margin:12px 0 0}
 form .field{margin-bottom:14px}
 form label{display:block;font-size:16px;margin-bottom:4px}
@@ -334,6 +350,7 @@ form input:focus,form textarea:focus,.product select:focus{outline:none;border-c
         <p class="lead">不只教會孩子解題，更陪孩子找回「原來，我做得到！」的那份自信。</p>
         <div class="btns">
           <a class="btn btn-primary" href="#resources">免費資源下載</a>
+          <a class="btn btn-sage" href="#shop">教材購買</a>
           <a class="btn btn-ghost" href="#about">認識酥酥老師</a>
         </div>
         <div class="points">
@@ -445,13 +462,15 @@ form input:focus,form textarea:focus,.product select:focus{outline:none;border-c
     <div class="wrap">
       <div class="sec-title">
         <div class="deco" style="display:flex;justify-content:center;gap:8px;margin-bottom:6px"><svg class="doodle" width="26" height="26"><use href="#i-book"/></svg></div>
-        <h2 class="ul">免費資源下載</h2><p>選擇年級和科目，點「下載」就能直接存到手機或電腦</p>
+        <h2 class="ul">免費資源下載</h2><p>依「年級 → 學期 → 科目」找到需要的教材，點「下載」就能存到手機或電腦</p>
       </div>
       <div class="filters">
-        <div class="chips grade" id="gradeChips"></div>
-        <div class="chips" id="subjectChips"></div>
+        <div class="step"><span class="step-label">① 選擇年級</span><div class="chips grade" id="gradeChips"></div></div>
+        <div class="step" id="semStep"><span class="step-label">② 選擇學期</span><div class="seg" id="semTabs"></div></div>
+        <div class="step" id="subjStep"><span class="step-label">③ 選擇科目</span><div class="chips" id="subjectChips"></div></div>
       </div>
-      <div class="res-grid" id="resGrid"></div>
+      <p class="crumb" id="crumb"></p>
+      <div id="resGrid"></div>
       <p class="hint">簡報檔案較大（約 10～25MB），建議在 Wi-Fi 環境下載。教材歡迎個人學習使用，請勿轉售。</p>
     </div>
   </section>
@@ -490,7 +509,6 @@ form input:focus,form textarea:focus,.product select:focus{outline:none;border-c
 
 <footer>
   <div class="wrap">
-    <div style="margin-bottom:6px"><a href="schedule.html">課表查詢</a>‧<a href="faq.html">課程服務指南</a></div>
     © <span id="year"></span> 酥酥老師家教 <svg class="doodle" width="16" height="16"><use href="#i-sprout"/></svg> 教材僅供個人學習使用，請勿轉售或公開散布
   </div>
 </footer>
@@ -508,37 +526,53 @@ document.querySelectorAll("h2.ul, h1.ul2").forEach(h => h.appendChild(document.g
 const dlUrl = id => `https://drive.google.com/uc?export=download&id=${id}`;
 const viewUrl = id => `https://drive.google.com/file/d/${id}/view`;
 const CN = ["","一","二","三","四","五","六"];
-const GRADES = [["all","全部"],[2,"二年級"],[3,"三年級"],[4,"四年級"],[5,"五年級"],[6,"六年級"],["tool","學習工具"]];
+const GRADES = [[2,"二年級"],[3,"三年級"],[4,"四年級"],[5,"五年級"],[6,"六年級"],["tool","學習工具"]];
 const SUBJECT_ORDER = ["國語","數學","社會","自然","英語","學習工具"];
-let fGrade = "all", fSubject = "全部科目", expanded = {};
-
-const matchGrade = r => fGrade === "all" || (fGrade === "tool" ? r.grade === "all" : String(r.grade) === String(fGrade));
-function renderChips(){
-  const pool = RESOURCES.filter(matchGrade);
-  const subs = [...new Set(pool.map(r => r.subject))].sort((a,b) => SUBJECT_ORDER.indexOf(a) - SUBJECT_ORDER.indexOf(b));
-  if (fSubject !== "全部科目" && !subs.includes(fSubject)) fSubject = "全部科目";
-  const count = g => RESOURCES.filter(r => g === "all" || (g === "tool" ? r.grade === "all" : String(r.grade) === String(g))).length;
-  document.getElementById("gradeChips").innerHTML = GRADES.map(([v,l]) =>
-    `<button class="chip ${String(fGrade)===String(v)?'active':''}" onclick="fGrade='${v}';renderRes()">${l}<span class="n">${count(v)}</span></button>`).join("");
-  document.getElementById("subjectChips").innerHTML = ["全部科目", ...subs].map(s =>
-    `<button class="chip ${fSubject===s?'active':''}" onclick="fSubject='${s}';renderRes()">${s}</button>`).join("");
-}
+const SUBJ_COLOR = {"國語":"var(--pink)","數學":"var(--sage)","社會":"var(--honey)","自然":"#9cc3c9","英語":"#c7b3e0","學習工具":"var(--pink)"};
+let fGrade = 3, fSem = "上", fSubject = "全部科目", expanded = {};
+const inGrade = (r,g) => g === "tool" ? r.grade === "all" : String(r.grade) === String(g);
+const inSem = (r,sm) => !r.sem || r.sem === sm;
+function pool(){ return RESOURCES.map((r,i)=>({...r,i})).filter(r => inGrade(r,fGrade) && (fGrade === "tool" || inSem(r,fSem))); }
+function setGrade(g){ fGrade = g; fSubject = "全部科目";
+  if (g !== "tool") { const up = RESOURCES.filter(r => inGrade(r,g) && inSem(r,"上")).length, dn = RESOURCES.filter(r => inGrade(r,g) && inSem(r,"下")).length; if (fSem === "上" && !up && dn) fSem = "下"; if (fSem === "下" && !dn && up) fSem = "上"; }
+  renderRes(); }
 function renderRes(){
-  renderChips();
-  const list = RESOURCES.map((r,i) => ({...r, i})).filter(r => matchGrade(r) && (fSubject === "全部科目" || r.subject === fSubject))
-    .sort((a,b) => (a.grade==="all"?0:a.grade) - (b.grade==="all"?0:b.grade) || (a.sem||"上").localeCompare(b.sem||"上") || SUBJECT_ORDER.indexOf(a.subject) - SUBJECT_ORDER.indexOf(b.subject));
+  const cnt = g => RESOURCES.filter(r => inGrade(r,g)).reduce((a,r)=>a+r.files.length,0);
+  document.getElementById("gradeChips").innerHTML = GRADES.map(([v,l]) =>
+    `<button class="chip ${String(fGrade)===String(v)?'active':''}" onclick="setGrade(${typeof v==='number'?v:`'${v}'`})">${l}<span class="n">${cnt(v)}</span></button>`).join("");
+  const isTool = fGrade === "tool";
+  document.getElementById("semStep").style.display = isTool ? "none" : "";
+  if (!isTool) {
+    const sc = sm => RESOURCES.filter(r => inGrade(r,fGrade) && inSem(r,sm)).reduce((a,r)=>a+r.files.length,0);
+    document.getElementById("semTabs").innerHTML = [["上","上學期"],["下","下學期"]].map(([v,l]) =>
+      `<button class="${fSem===v?'active':''}" onclick="fSem='${v}';fSubject='全部科目';renderRes()">${l}<span class="n">${sc(v)}</span></button>`).join("");
+  }
+  const list = pool();
+  const subs = [...new Set(list.map(r => r.subject))].sort((a,b) => SUBJECT_ORDER.indexOf(a) - SUBJECT_ORDER.indexOf(b));
+  if (fSubject !== "全部科目" && !subs.includes(fSubject)) fSubject = "全部科目";
+  document.getElementById("subjStep").style.display = subs.length > 1 ? "" : "none";
+  document.getElementById("subjectChips").innerHTML = ["全部科目", ...subs].map(sb =>
+    `<button class="chip ${fSubject===sb?'active':''}" onclick="fSubject='${sb}';renderRes()">${sb}</button>`).join("");
+  const gl = isTool ? "學習工具" : `${CN[fGrade]}年級 › ${fSem}學期`;
+  const total = list.reduce((a,r)=>a+r.files.length,0);
+  document.getElementById("crumb").innerHTML = total ? `${gl}　<span>共 ${total} 個檔案</span>` : "";
+  const shownSubs = fSubject === "全部科目" ? subs : [fSubject];
   const tapes = ["", "sage", "honey"];
-  document.getElementById("resGrid").innerHTML = list.length ? list.map((r, k) => {
-    const gl = r.grade === "all" ? "不分年級" : CN[r.grade] + (r.sem ? r.sem : "年級");
+  const card = (r,k) => {
     const many = r.files.length > 4 && !expanded[r.i];
     const shown = many ? r.files.slice(0, 3) : r.files;
     return `<div class="card res"><span class="tape ${tapes[k%3]}"></span>
-      <div class="meta"><span class="pill">${gl}</span><span class="pill s">${r.subject}</span><span class="pill h">${r.type}</span>${r.version?`<span class="pill v">${r.version}版</span>`:""}</div>
+      <div class="meta"><span class="pill h">${r.type}</span>${r.version?`<span class="pill v">${r.version}版</span>`:""}${!isTool && !r.sem ? `<span class="pill v">不分學期</span>`:""}</div>
       <h3>${r.title}</h3>
       <ul class="files">${shown.map(([n,id]) => `<li><span class="name">${n}</span><span class="acts"><a href="${viewUrl(id)}" target="_blank" rel="noopener">預覽</a><a class="dl" href="${dlUrl(id)}" target="_blank" rel="noopener">下載</a></span></li>`).join("")}</ul>
       ${many ? `<button class="more" onclick="expanded[${r.i}]=1;renderRes()">展開全部 ${r.files.length} 個檔案</button>` : ""}
     </div>`;
-  }).join("") : `<div class="empty"><svg width="40" height="40"><use href="#i-sprout"/></svg><br>這個分類的資源正在準備中，敬請期待！</div>`;
+  };
+  document.getElementById("resGrid").innerHTML = list.length ? shownSubs.map(sb => {
+    const items = list.filter(r => r.subject === sb);
+    return `<div class="subj-sec"><h3 class="subj-head"><span class="dot" style="background:${SUBJ_COLOR[sb]||'var(--sage)'}"></span>${sb}<small>${items.reduce((a,r)=>a+r.files.length,0)} 個檔案</small></h3>
+      <div class="res-grid">${items.map(card).join("")}</div></div>`;
+  }).join("") : `<div class="empty"><svg width="40" height="40"><use href="#i-sprout"/></svg><br>${gl}的資源正在準備中，敬請期待！</div>`;
 }
 
 /* ---------- 商品與購物車 ---------- */
