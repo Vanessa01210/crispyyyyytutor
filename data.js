@@ -214,7 +214,7 @@ const PRODUCTS = [
     ],
   },
   {
-    id: "review",
+    id: "review",hidden: true,
     name: "國語、社會考前複習包",
     tag: "三～六年級・分版本",
     desc: "段考前的重點整理與練習，依年級與教科書版本選購。",
