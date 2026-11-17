@@ -2,12 +2,12 @@
    酥酥老師網站：內容設定檔
    之後新增資源、修改商品或匯款資訊，只要改這個檔案就好。
    ========================================================= */
-
+ 
 const SITE = {
   // Google 試算表訂單程式的網址（照「設定說明」部署後貼上）
   // 還沒設定前，網站會用「示範模式」，訂單不會真的送出。
-  ORDER_API_URL: "",
-
+  ORDER_API_URL: "https://script.google.com/macros/s/AKfycbyc6wAWFVuCntItYwjmH7xUFT5L9PLsgcNoASBwjVzBUy7XkUxTkdXhJr6C3Sd1Kfx4/exec",
+ 
   // 匯款資訊（請改成你的帳戶）
   bank: {
     bankName: "連線商業銀行 LINE Bank",
@@ -17,14 +17,14 @@ const SITE = {
     holder: "",   // 戶名（選填，填了會顯示在匯款資訊）
     note: "匯款後請填寫下方表單，確認入帳後 1～2 天內寄出檔案至您的 Email。",
   },
-
+ 
   contact: {
     instagram: "https://www.instagram.com/crispyyyyy0121/",
     threads: "https://www.threads.net/@crispyyyyy0121",
     handle: "@crispyyyyy0121",
   },
 };
-
+ 
 /* ---------------------------------------------------------
    免費資源（檔案放在 Google 雲端，網站直接下載）
    新增方式：在雲端檔案按「共用 → 複製連結」，
@@ -41,7 +41,7 @@ const RESOURCES = [
     ["空白版", "1W2_8hQsF3gDLGERmb0fufwZ6mur5Bfns"],
     ["集點卡（圖片）", "1uq5FdlGXpSDk8H9doHPmQXiQGvWf3a9N"],
   ]},
-
+ 
   // ===== 二年級 =====
   { grade: 2, sem: "上", subject: "國語", type: "簡報", title: "二上國語各課簡報", files: [
     ["第 1 課　新學年新希望", "1PCFf1U9mEwnFHe_6RU4GiYiRaNxsYYqz"],
@@ -51,7 +51,7 @@ const RESOURCES = [
     ["第 5 課　坐竹籃船", "1RQM_EQpYTkiOaOiYjZLI54-JaeumdqYE"],
     ["第 6 課　小鎮的柿餅節", "1mM2qhMdl68kvAckXDKZGggKhPuNIXYTd"],
   ]},
-
+ 
   // ===== 三年級 =====
   { grade: 3, sem: "上", subject: "國語", type: "簡報", version: "南一", title: "三上國語各課簡報", files: [
     ["第 1 課　你好，新朋友", "1hkj4CytmONWOgQJXZpzQBm-J0m5iVobW"],
@@ -92,7 +92,7 @@ const RESOURCES = [
   ]},
   { grade: 3, sem: "下", subject: "自然", type: "複習圖", title: "三下自然複習圖", files: [["圖片", "1wPMHxEXNidqI7MXFcy9AG9LYAh9DaLis"]] },
   { grade: 3, sem: "", subject: "自然", type: "練習卷", version: "南一", title: "三年級自然期中考 B 卷", files: [["PDF 檔", "1Qfd5pDfKVCJWohdVU7FUyH_Ogsl2vK6z"]] },
-
+ 
   // ===== 四年級 =====
   { grade: 4, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "四上國語各課簡報", files: [
     ["第 1 課　窗口邊的臺灣欒樹", "1y4OQ41S5YO2G_iIFopfe8fVoxRnMuFfF"],
@@ -152,7 +152,7 @@ const RESOURCES = [
     ["期末總複習圖", "1EoHrHrruhT4qcQxmrv1eQsn6jrJNzb1g"],
     ["昆蟲大解密（圖片）", "124zA6IqBX3HaJeb__omyqWh3KCq9Y1tR"],
   ]},
-
+ 
   // ===== 五年級 =====
   { grade: 5, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "五上國語各課簡報", files: [
     ["第 1 課　蚊帳大使", "1x-PcbpqN-av2-3ixfDoqigHJPutswIH8"],
@@ -178,7 +178,7 @@ const RESOURCES = [
     ["第二單元", "16vIt7HBE_uBwVDH5NN1gemM-sYgTBypC"],
   ]},
 ];
-
+ 
 /* ---------------------------------------------------------
    付費商品
    每個商品可以有多個「選項」（年級、版本…），
@@ -214,7 +214,7 @@ const PRODUCTS = [
     ],
   },
   {
-    id: "review",hidden: true,
+    id: "review",
     name: "國語、社會考前複習包",
     tag: "三～六年級・分版本",
     desc: "段考前的重點整理與練習，依年級與教科書版本選購。",
@@ -239,3 +239,4 @@ const PRODUCTS = [
     ],
   },
 ];
+ 
