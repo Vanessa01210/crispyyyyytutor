@@ -581,12 +581,12 @@ try { cart = JSON.parse(localStorage.getItem("susu-cart") || "[]"); } catch(e) {
 const saveCart = () => { try { localStorage.setItem("susu-cart", JSON.stringify(cart)); } catch(e) {} updateFab(); };
 const findOption = code => { for (const p of PRODUCTS) for (const o of p.options) if (o.code === code) return {p, o}; };
 function priceText(p){
-  const ps = p.options.map(o => o.price), lo = Math.min(...ps), hi = Math.max(...ps);
+  const ps = p.options.filter(o => !o.hidden).map(o => o.price), lo = Math.min(...ps), hi = Math.max(...ps);
   return lo === hi ? `NT$ ${lo}` : `NT$ ${lo}～${hi}`;
 }
 function renderShop(){
   const tapes = ["", "sage", "honey"];
-  document.getElementById("shopGrid").innerHTML = PRODUCTS.map((p,k) => `
+  document.getElementById("shopGrid").innerHTML = PRODUCTS.filter(p => !p.hidden).map((p,k) => `
     <div class="card product"><span class="tape ${tapes[k%3]}"></span>
       <div class="meta"><span class="pill s">${p.tag}</span></div>
       <h3 style="margin:0">${p.name}</h3>
@@ -595,7 +595,7 @@ function renderShop(){
       <div class="spacer"></div>
       <select id="sel-${p.id}" onchange="showPrice('${p.id}')">
         <option value="">請選擇${p.options.length > 2 ? "年級／版本" : "適用年級"}</option>
-        ${p.options.map(o => `<option value="${o.code}">${o.label}（$${o.price}）</option>`).join("")}
+        ${p.options.filter(o => !o.hidden).map(o => `<option value="${o.code}">${o.label}（$${o.price}）</option>`).join("")}
       </select>
       <button class="btn btn-primary" onclick="addToCart('${p.id}')">加入購物車</button>
     </div>`).join("");
