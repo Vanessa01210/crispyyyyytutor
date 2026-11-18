@@ -266,6 +266,7 @@ footer a{margin:0 8px}
 .subj-head small{font-size:14px;color:var(--muted)}
 .subj-head::after{content:"";flex:1;border-top:2px dashed var(--line)}
 
+.trial{align-self:flex-start;font-size:15px;color:var(--pink-dark);text-decoration:underline dashed;text-underline-offset:4px}
 /* ---------- cart & modal ---------- */
 .cart-fab{position:fixed;right:18px;bottom:18px;z-index:30;background:var(--pink);color:#fff;border:2px solid var(--pink-dark);border-radius:99px;padding:12px 20px;font-size:17px;box-shadow:3px 4px 0 var(--pink-dark);cursor:pointer;display:none}
 .cart-fab.show{display:flex;gap:8px;align-items:center}
@@ -344,7 +345,7 @@ form input:focus,form textarea:focus,.product select:focus{outline:none;border-c
       <g stroke="#b9a08a" stroke-width="1.5" stroke-linejoin="round"><path d="M40 25l16 34 12-30z" fill="#f3c6bf"/><path d="M95 37l12 34 17-29z" fill="#cfdcbf"/><path d="M155 45l10 35 19-28z" fill="#f2d9a6"/><path d="M220 48l8 35 20-30z" fill="#f3c6bf"/><path d="M285 44l10 34 18-31z" fill="#cfdcbf"/><path d="M350 33l13 33 15-32z" fill="#f2d9a6"/></g></svg>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="ribbon"><svg viewBox="0 0 250 54" aria-hidden="true"><path d="M16 14h218l-10 15 10 15H16l10-15z" fill="#f8d4ce" stroke="#c9776d" stroke-width="1.6" stroke-linejoin="round"/><path d="M30 10h190v30H30z" fill="#fbe2dd" stroke="#c9776d" stroke-width="1.6"/></svg><span>♥ 國中小全科家教 ♥</span></div>
+        <div class="ribbon"><svg viewBox="0 0 250 54" aria-hidden="true"><path d="M16 14h218l-10 15 10 15H16l10-15z" fill="#f8d4ce" stroke="#c9776d" stroke-width="1.6" stroke-linejoin="round"/><path d="M30 10h190v30H30z" fill="#fbe2dd" stroke="#c9776d" stroke-width="1.6"/></svg><span>國中小全科家教</span></div>
         <br><h1 class="ul2">酥酥老師家教</h1><br>
         <div class="slogan">用心教學・用愛陪伴・一起成長 <svg width="16" height="16"><use href="#i-heart"/></svg></div>
         <p class="lead">不只教會孩子解題，更陪孩子找回「原來，我做得到！」的那份自信。</p>
@@ -526,7 +527,7 @@ document.querySelectorAll("h2.ul, h1.ul2").forEach(h => h.appendChild(document.g
 const dlUrl = id => `https://drive.google.com/uc?export=download&id=${id}`;
 const viewUrl = id => `https://drive.google.com/file/d/${id}/view`;
 const CN = ["","一","二","三","四","五","六"];
-const GRADES = [[2,"二年級"],[3,"三年級"],[4,"四年級"],[5,"五年級"],[6,"六年級"],["tool","學習工具"]];
+const GRADES = [[2,"二年級"],[3,"三年級"],[4,"四年級"],[5,"五年級"],[6,"六年級"],["tool","不分年級"]];
 const SUBJECT_ORDER = ["國語","數學","社會","自然","英語","學習工具"];
 const SUBJ_COLOR = {"國語":"var(--pink)","數學":"var(--sage)","社會":"var(--honey)","自然":"#9cc3c9","英語":"#c7b3e0","學習工具":"var(--pink)"};
 let fGrade = 3, fSem = "上", fSubject = "全部科目", expanded = {};
@@ -553,7 +554,7 @@ function renderRes(){
   document.getElementById("subjStep").style.display = subs.length > 1 ? "" : "none";
   document.getElementById("subjectChips").innerHTML = ["全部科目", ...subs].map(sb =>
     `<button class="chip ${fSubject===sb?'active':''}" onclick="fSubject='${sb}';renderRes()">${sb}</button>`).join("");
-  const gl = isTool ? "學習工具" : `${CN[fGrade]}年級 › ${fSem}學期`;
+  const gl = isTool ? "不分年級" : `${CN[fGrade]}年級 › ${fSem}學期`;
   const total = list.reduce((a,r)=>a+r.files.length,0);
   document.getElementById("crumb").innerHTML = total ? `${gl}　<span>共 ${total} 個檔案</span>` : "";
   const shownSubs = fSubject === "全部科目" ? subs : [fSubject];
@@ -592,6 +593,7 @@ function renderShop(){
       <h3 style="margin:0">${p.name}</h3>
       <p>${p.desc}</p>
       <div class="price" id="price-${p.id}">${priceText(p)}</div>
+      <a class="trial" id="trial-${p.id}" target="_blank" rel="noopener" style="${p.preview?'':'display:none'}" href="${p.preview?viewUrl(p.preview):'#'}">📖 免費試閱${p.preview?'':'這一冊'}</a>
       <div class="spacer"></div>
       <select id="sel-${p.id}" onchange="showPrice('${p.id}')">
         <option value="">請選擇${p.options.length > 2 ? "年級／版本" : "適用年級"}</option>
@@ -603,6 +605,8 @@ function renderShop(){
 function showPrice(id){
   const p = PRODUCTS.find(x => x.id === id), o = p.options.find(x => x.code === document.getElementById("sel-"+id).value);
   document.getElementById("price-"+id).textContent = o ? `NT$ ${o.price}` : priceText(p);
+  const t = document.getElementById("trial-"+id), pv = (o && o.preview) || p.preview;
+  t.style.display = pv ? "" : "none"; if (pv) t.href = viewUrl(pv);
 }
 function addToCart(id){
   const sel = document.getElementById("sel-"+id);

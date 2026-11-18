@@ -2,12 +2,12 @@
    酥酥老師網站：內容設定檔
    之後新增資源、修改商品或匯款資訊，只要改這個檔案就好。
    ========================================================= */
- 
+
 const SITE = {
   // Google 試算表訂單程式的網址（照「設定說明」部署後貼上）
   // 還沒設定前，網站會用「示範模式」，訂單不會真的送出。
   ORDER_API_URL: "https://script.google.com/macros/s/AKfycbyc6wAWFVuCntItYwjmH7xUFT5L9PLsgcNoASBwjVzBUy7XkUxTkdXhJr6C3Sd1Kfx4/exec",
- 
+
   // 匯款資訊（請改成你的帳戶）
   bank: {
     bankName: "連線商業銀行 LINE Bank",
@@ -17,14 +17,14 @@ const SITE = {
     holder: "",   // 戶名（選填，填了會顯示在匯款資訊）
     note: "匯款後請填寫下方表單，確認入帳後 1～2 天內寄出檔案至您的 Email。",
   },
- 
+
   contact: {
     instagram: "https://www.instagram.com/crispyyyyy0121/",
     threads: "https://www.threads.net/@crispyyyyy0121",
     handle: "@crispyyyyy0121",
   },
 };
- 
+
 /* ---------------------------------------------------------
    免費資源（檔案放在 Google 雲端，網站直接下載）
    新增方式：在雲端檔案按「共用 → 複製連結」，
@@ -41,7 +41,7 @@ const RESOURCES = [
     ["空白版", "1W2_8hQsF3gDLGERmb0fufwZ6mur5Bfns"],
     ["集點卡（圖片）", "1uq5FdlGXpSDk8H9doHPmQXiQGvWf3a9N"],
   ]},
- 
+
   // ===== 二年級 =====
   { grade: 2, sem: "上", subject: "國語", type: "簡報", title: "二上國語各課簡報", files: [
     ["第 1 課　新學年新希望", "1PCFf1U9mEwnFHe_6RU4GiYiRaNxsYYqz"],
@@ -51,7 +51,7 @@ const RESOURCES = [
     ["第 5 課　坐竹籃船", "1RQM_EQpYTkiOaOiYjZLI54-JaeumdqYE"],
     ["第 6 課　小鎮的柿餅節", "1mM2qhMdl68kvAckXDKZGggKhPuNIXYTd"],
   ]},
- 
+
   // ===== 三年級 =====
   { grade: 3, sem: "上", subject: "國語", type: "簡報", version: "南一", title: "三上國語各課簡報", files: [
     ["第 1 課　你好，新朋友", "1hkj4CytmONWOgQJXZpzQBm-J0m5iVobW"],
@@ -92,7 +92,7 @@ const RESOURCES = [
   ]},
   { grade: 3, sem: "下", subject: "自然", type: "複習圖", title: "三下自然複習圖", files: [["圖片", "1wPMHxEXNidqI7MXFcy9AG9LYAh9DaLis"]] },
   { grade: 3, sem: "", subject: "自然", type: "練習卷", version: "南一", title: "三年級自然期中考 B 卷", files: [["PDF 檔", "1Qfd5pDfKVCJWohdVU7FUyH_Ogsl2vK6z"]] },
- 
+
   // ===== 四年級 =====
   { grade: 4, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "四上國語各課簡報", files: [
     ["第 1 課　窗口邊的臺灣欒樹", "1y4OQ41S5YO2G_iIFopfe8fVoxRnMuFfF"],
@@ -152,7 +152,7 @@ const RESOURCES = [
     ["期末總複習圖", "1EoHrHrruhT4qcQxmrv1eQsn6jrJNzb1g"],
     ["昆蟲大解密（圖片）", "124zA6IqBX3HaJeb__omyqWh3KCq9Y1tR"],
   ]},
- 
+
   // ===== 五年級 =====
   { grade: 5, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "五上國語各課簡報", files: [
     ["第 1 課　蚊帳大使", "1x-PcbpqN-av2-3ixfDoqigHJPutswIH8"],
@@ -177,12 +177,64 @@ const RESOURCES = [
     ["第一單元", "1EgBbXK_LZc3HAaAyWzUen1riuOju6F-J"],
     ["第二單元", "16vIt7HBE_uBwVDH5NN1gemM-sYgTBypC"],
   ]},
+
+  // ===== 六年級 =====
+  { grade: 6, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "六上國語各課簡報", files: [
+    ["第 1 課　跑道", "1ojeJNt5Guge2SACrvsqZt4Les2uPqzCp"],
+    ["第 2 課　朱子治家格言選", "121tGcnZMF9ykEXD-1EoQBW5tmXIwKBry"],
+    ["第 3 課　談遇見更好的自己", "1c1_c4iqkslie9a46IfPOgXZj7NktptPN"],
+    ["第 4 課　臺灣美食詩選", "1IqFysODW2RXZMfFYWi9LEmCKXt2ESc3X"],
+    ["第 5 課　最好的味覺禮物", "1E18miP_zwzTECSQRPLEUVuPcRj180LoJ"],
+    ["第 6 課　珍珠奶茶", "1IoATV8iP6kbqc5K7Q4CmgIOcdGAlkvbM"],
+  ]},
+  { grade: 6, sem: "上", subject: "社會", type: "簡報", version: "康軒", title: "六上社會單元複習簡報", files: [
+    ["1-1", "1wj4WSKIR33Dd8r1g08vtfK2Xjx6ccd2m"],
+    ["1-2", "1py7XSpT1DOA0YGxxPzn6xYJj5a9C56f_"],
+    ["1-3", "1mEGErFhC7k4P8mU0RBccrCdm6GmDzvMs"],
+    ["2-1", "1cfNUODar9kaLFkUjHoERM4Cl3skXpV__"],
+    ["2-2", "13F25MPIPdhe_z_fr-mYaXRmY-dlznmrV"],
+  ]},
+  { grade: 6, sem: "上", subject: "數學", type: "練習卷", title: "六上數學第一次期中練習題", files: [
+    ["練習題", "1SbSxL1MSrhvZHIbGaMYiyC-mjcEZmZ9J"],
+    ["詳解", "1iuMdO8dYxGUYNMLFhAi3niPJHxs_HRMY"],
+  ]},
+  { grade: 6, sem: "", subject: "數學", type: "學習單", title: "容積急救站", files: [["PDF 檔", "1ehQemNqlijn9Xel5ZcZ1Lus0aEWLi0WJ"]] },
+  { grade: 6, sem: "下", subject: "數學", type: "簡報", title: "六下數學期末總複習簡報", files: [["PDF 檔", "10Gf0r2Z0T74RnJL4Mh50fQSjn6boCrfd"]] },
+  { grade: 6, sem: "下", subject: "數學", type: "複習圖", title: "六下數學期末複習圖", files: [["PDF 檔", "1HHM45T5Qhr0AmK-hJSPQxqPoHbgI9ONh"]] },
+
+  // ===== 不分年級：英語、自然實驗 =====
+  { grade: "all", sem: "", subject: "英語", type: "繪本教材", title: "英文繪本教材", files: [
+    ["The Farmer and the Hat", "1SC6STbUAPM2ycki3RI8bqffq6pcM-ZGX"],
+    ["The Hundred Pacer 百步蛇（檔案較大）", "10_o59bIxXk-qmrfBw4ltsywtISz2PsNr"],
+    ["The Eagle and the Snake", "1rLj3mCNZkjXk0s0cgWo3jnwIZjHGmGHc"],
+    ["Koala", "1q4_9imVslm8XWXc7j_qBuB-BCM8yuqYE"],
+    ["Happy Little Helper", "1oG0CIZMxscyVh_mELhyHr3C7AFsQo0G8"],
+  ]},
+  { grade: "all", sem: "", subject: "英語", type: "主題教材", title: "英文主題探索教材", files: [
+    ["Why Do Mosquitoes Bite?", "1g5nIS8pihaN0dMo5TtdhDdMaY6WAPwc8"],
+    ["Taiwan's Indigenous Cultures 教材包", "1cBBZPs6H2Eg_xfa_L7ARgD--r3rZ--i5"],
+    ["Playing Music Is Fun! 認識樂器", "1c8MBT5ro0E1PzljfhhVagLBTqUeE-04J"],
+    ["電影《食破天驚》英文教材", "1jW734BlPyJXX3VES45Z6BWjflJ_3BPvQ"],
+    ["Fruits or Vegetables 分類活動", "10nXfhm6w05KMr5smxTu8UXy6QLJTE6z7"],
+  ]},
+  { grade: "all", sem: "", subject: "英語", type: "學習單", title: "節慶英文學習單", files: [
+    ["Christmas 聖誕節學習單", "1x5xZuUdfwJFuAqUL7MD7Pt1sKfLAcZtZ"],
+    ["父親節學習單（中英版）", "1fhNM3TVNDDFraTh6LRde0wPdTJKozcXZ"],
+  ]},
+  { grade: "all", sem: "", subject: "英語", type: "學習單", title: "自然發音 c、k、ck", files: [["PDF 檔", "1YXCcE5-KTEm77AdvDRpL1zkQeVKYCbLR"]] },
+  { grade: "all", sem: "", subject: "自然", type: "實驗手作", title: "自然實驗手作", files: [
+    ["冰冰砰砰", "1Ao7RPImo88Vjn7higD_YyjED-HoLaPIC"],
+    ["許願彩色鹽", "1gcveE1_wTjUQdAeKwDrNDTPH664vcXcv"],
+    ["顏色層層疊", "1VLHU7pndS4zaE1m2FqPYWArAChmHjzaO"],
+    ["造紙術", "1h1MwUD2_hulhVAlI1G74UsKFiNEenoqW"],
+  ]},
 ];
- 
+
 /* ---------------------------------------------------------
    付費商品
    每個商品可以有多個「選項」（年級、版本…），
    每個選項的 code 要和 Google 試算表「商品連結」分頁的代碼一樣。
+   試閱：preview 填雲端試閱檔 ID（可放在商品或選項上）。
    下架：在商品或選項裡加上 hidden: true（例如 { id: "math", hidden: true, ...}），
         想重新上架時刪掉這段即可。
    --------------------------------------------------------- */
@@ -193,19 +245,20 @@ const PRODUCTS = [
     tag: "三～六年級",
     desc: "依課綱整理的段考複習手冊，重點觀念＋例題，讓孩子考前複習有方向。",
     options: [
-      { label: "三年級上學期", code: "math-3a", price: 110 },
-      { label: "三年級下學期", code: "math-3b", price: 110 },
-      { label: "四年級上學期", code: "math-4a", price: 110 },
-      { label: "四年級下學期", code: "math-4b", price: 110 },
-      { label: "五年級上學期", code: "math-5a", price: 110 },
-      { label: "五年級下學期", code: "math-5b", price: 110 },
-      { label: "六年級上學期", code: "math-6a", price: 110 },
-      { label: "六年級下學期", code: "math-6b", price: 110 },
+      { label: "三年級上學期", code: "math-3a", price: 110, preview: "10oYGupu3H-qvTl9sSIx5vim8xJEy0YhQ" },
+      { label: "三年級下學期", code: "math-3b", price: 110, preview: "1kLXbItd3GqMv4SUwuJFDdvrMC_igcXGS" },
+      { label: "四年級上學期", code: "math-4a", price: 110, preview: "1n0v5i7N9VRg_iILHFFixVNcfk7hb5ApZ" },
+      { label: "四年級下學期", code: "math-4b", price: 110, preview: "1xyercBTQaLDSlJyFbrCtzjHa2Y_JEjhk" },
+      { label: "五年級上學期", code: "math-5a", price: 110, preview: "1Yna1G9Fxex0vtZnOZe94RUv1BS4VtBxU" },
+      { label: "五年級下學期", code: "math-5b", price: 110, preview: "12SDxZyxjwpElkUAQAj7bsBYSRVOuBTK6" },
+      { label: "六年級上學期", code: "math-6a", price: 110, preview: "1_Wc5cVlOWwc3Cd4tMdydGvNuEPA8dtwX" },
+      { label: "六年級下學期", code: "math-6b", price: 110, preview: "1EBRloSaFGuC4HV4EvcO8lQQ1KIRpiKCm" },
     ],
   },
   {
     id: "reading",
     name: "國語閱讀講義",
+    preview: "1SZx1wydmTMae7B5s4xsT_L7C9emFm-YM",   // 試閱版（整個商品共用）
     tag: "中、高年級",
     desc: "循序練習閱讀理解策略，培養孩子抓重點、統整與表達的能力。",
     options: [
@@ -214,7 +267,7 @@ const PRODUCTS = [
     ],
   },
   {
-    id: "review", hidden: true,
+    id: "review",
     name: "國語、社會考前複習包",
     tag: "三～六年級・分版本",
     desc: "段考前的重點整理與練習，依年級與教科書版本選購。",
@@ -239,4 +292,3 @@ const PRODUCTS = [
     ],
   },
 ];
- 
