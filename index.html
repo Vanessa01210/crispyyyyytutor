@@ -267,6 +267,10 @@ footer a{margin:0 8px}
 .subj-head::after{content:"";flex:1;border-top:2px dashed var(--line)}
 
 .trial{align-self:flex-start;font-size:15px;color:var(--pink-dark);text-decoration:underline dashed;text-underline-offset:4px}
+.trial-note{font-size:14px;margin:8px 0 0}
+.trials{font-size:15px;color:var(--pink-dark);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.trials a{color:var(--pink-dark);background:var(--pink-soft);border-radius:99px;padding:0 10px;text-decoration:none;font-size:14px}
+.trial-note a{color:var(--pink-dark)}
 /* ---------- cart & modal ---------- */
 .cart-fab{position:fixed;right:18px;bottom:18px;z-index:30;background:var(--pink);color:#fff;border:2px solid var(--pink-dark);border-radius:99px;padding:12px 20px;font-size:17px;box-shadow:3px 4px 0 var(--pink-dark);cursor:pointer;display:none}
 .cart-fab.show{display:flex;gap:8px;align-items:center}
@@ -565,7 +569,10 @@ function renderRes(){
     return `<div class="card res"><span class="tape ${tapes[k%3]}"></span>
       <div class="meta"><span class="pill h">${r.type}</span>${r.version?`<span class="pill v">${r.version}版</span>`:""}${!isTool && !r.sem ? `<span class="pill v">不分學期</span>`:""}</div>
       <h3>${r.title}</h3>
-      <ul class="files">${shown.map(([n,id]) => `<li><span class="name">${n}</span><span class="acts"><a href="${viewUrl(id)}" target="_blank" rel="noopener">預覽</a><a class="dl" href="${dlUrl(id)}" target="_blank" rel="noopener">下載</a></span></li>`).join("")}</ul>
+      <ul class="files">${shown.map(([n,id]) => r.viewOnly
+        ? `<li><span class="name">${n}</span><span class="acts"><a class="dl" href="${viewUrl(id)}" target="_blank" rel="noopener">線上試閱</a></span></li>`
+        : `<li><span class="name">${n}</span><span class="acts"><a href="${viewUrl(id)}" target="_blank" rel="noopener">預覽</a><a class="dl" href="${dlUrl(id)}" target="_blank" rel="noopener">下載</a></span></li>`).join("")}</ul>
+      ${r.viewOnly ? `<p class="trial-note">喜歡的話，完整版可到 <a href="#shop">教材購買</a> 選購</p>` : ""}
       ${many ? `<button class="more" onclick="expanded[${r.i}]=1;renderRes()">展開全部 ${r.files.length} 個檔案</button>` : ""}
     </div>`;
   };
@@ -593,7 +600,8 @@ function renderShop(){
       <h3 style="margin:0">${p.name}</h3>
       <p>${p.desc}</p>
       <div class="price" id="price-${p.id}">${priceText(p)}</div>
-      <a class="trial" id="trial-${p.id}" target="_blank" rel="noopener" style="${p.preview?'':'display:none'}" href="${p.preview?viewUrl(p.preview):'#'}">📖 免費試閱${p.preview?'':'這一冊'}</a>
+      ${p.preview ? `<a class="trial" target="_blank" rel="noopener" href="${viewUrl(p.preview)}">📖 免費試閱</a>` : ""}
+      ${p.options.some(o => o.preview && !o.hidden) ? `<div class="trials">📖 免費試閱：${p.options.filter(o => o.preview && !o.hidden).map(o => `<a target="_blank" rel="noopener" href="${viewUrl(o.preview)}">${o.short || o.label}</a>`).join("")}</div>` : ""}
       <div class="spacer"></div>
       <select id="sel-${p.id}" onchange="showPrice('${p.id}')">
         <option value="">請選擇${p.options.length > 2 ? "年級／版本" : "適用年級"}</option>
@@ -605,8 +613,6 @@ function renderShop(){
 function showPrice(id){
   const p = PRODUCTS.find(x => x.id === id), o = p.options.find(x => x.code === document.getElementById("sel-"+id).value);
   document.getElementById("price-"+id).textContent = o ? `NT$ ${o.price}` : priceText(p);
-  const t = document.getElementById("trial-"+id), pv = (o && o.preview) || p.preview;
-  t.style.display = pv ? "" : "none"; if (pv) t.href = viewUrl(pv);
 }
 function addToCart(id){
   const sel = document.getElementById("sel-"+id);

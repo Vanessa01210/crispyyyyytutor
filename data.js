@@ -179,7 +179,7 @@ const RESOURCES = [
   ]},
 
   // ===== 六年級 =====
-  { grade: 6, sem: "上", subject: "國語", type: "簡報", version: "康軒", title: "六上國語各課簡報", files: [
+  { grade: 6, sem: "上", subject: "國語", type: "複習簡報", version: "康軒", title: "六上國語複習簡報", files: [
     ["第 1 課　跑道", "1ojeJNt5Guge2SACrvsqZt4Les2uPqzCp"],
     ["第 2 課　朱子治家格言選", "121tGcnZMF9ykEXD-1EoQBW5tmXIwKBry"],
     ["第 3 課　談遇見更好的自己", "1c1_c4iqkslie9a46IfPOgXZj7NktptPN"],
@@ -187,7 +187,7 @@ const RESOURCES = [
     ["第 5 課　最好的味覺禮物", "1E18miP_zwzTECSQRPLEUVuPcRj180LoJ"],
     ["第 6 課　珍珠奶茶", "1IoATV8iP6kbqc5K7Q4CmgIOcdGAlkvbM"],
   ]},
-  { grade: 6, sem: "上", subject: "社會", type: "簡報", version: "康軒", title: "六上社會單元複習簡報", files: [
+  { grade: 6, sem: "上", subject: "社會", type: "複習簡報", version: "康軒", title: "六上社會複習簡報", files: [
     ["1-1", "1wj4WSKIR33Dd8r1g08vtfK2Xjx6ccd2m"],
     ["1-2", "1py7XSpT1DOA0YGxxPzn6xYJj5a9C56f_"],
     ["1-3", "1mEGErFhC7k4P8mU0RBccrCdm6GmDzvMs"],
@@ -228,6 +228,7 @@ const RESOURCES = [
     ["顏色層層疊", "1VLHU7pndS4zaE1m2FqPYWArAChmHjzaO"],
     ["造紙術", "1h1MwUD2_hulhVAlI1G74UsKFiNEenoqW"],
   ]},
+
 ];
 
 /* ---------------------------------------------------------
@@ -245,14 +246,14 @@ const PRODUCTS = [
     tag: "三～六年級",
     desc: "依課綱整理的段考複習手冊，重點觀念＋例題，讓孩子考前複習有方向。",
     options: [
-      { label: "三年級上學期", code: "math-3a", price: 110, preview: "10oYGupu3H-qvTl9sSIx5vim8xJEy0YhQ" },
-      { label: "三年級下學期", code: "math-3b", price: 110, preview: "1kLXbItd3GqMv4SUwuJFDdvrMC_igcXGS" },
-      { label: "四年級上學期", code: "math-4a", price: 110, preview: "1n0v5i7N9VRg_iILHFFixVNcfk7hb5ApZ" },
-      { label: "四年級下學期", code: "math-4b", price: 110, preview: "1xyercBTQaLDSlJyFbrCtzjHa2Y_JEjhk" },
-      { label: "五年級上學期", code: "math-5a", price: 110, preview: "1Yna1G9Fxex0vtZnOZe94RUv1BS4VtBxU" },
-      { label: "五年級下學期", code: "math-5b", price: 110, preview: "12SDxZyxjwpElkUAQAj7bsBYSRVOuBTK6" },
-      { label: "六年級上學期", code: "math-6a", price: 110, preview: "1_Wc5cVlOWwc3Cd4tMdydGvNuEPA8dtwX" },
-      { label: "六年級下學期", code: "math-6b", price: 110, preview: "1EBRloSaFGuC4HV4EvcO8lQQ1KIRpiKCm" },
+      { label: "三年級上學期", code: "math-3a", price: 110, short: "三上", preview: "10oYGupu3H-qvTl9sSIx5vim8xJEy0YhQ" },
+      { label: "三年級下學期", code: "math-3b", price: 110, short: "三下", preview: "1kLXbItd3GqMv4SUwuJFDdvrMC_igcXGS" },
+      { label: "四年級上學期", code: "math-4a", price: 110, short: "四上", preview: "1n0v5i7N9VRg_iILHFFixVNcfk7hb5ApZ" },
+      { label: "四年級下學期", code: "math-4b", price: 110, short: "四下", preview: "1xyercBTQaLDSlJyFbrCtzjHa2Y_JEjhk" },
+      { label: "五年級上學期", code: "math-5a", price: 110, short: "五上", preview: "1Yna1G9Fxex0vtZnOZe94RUv1BS4VtBxU" },
+      { label: "五年級下學期", code: "math-5b", price: 110, short: "五下", preview: "12SDxZyxjwpElkUAQAj7bsBYSRVOuBTK6" },
+      { label: "六年級上學期", code: "math-6a", price: 110, short: "六上", preview: "1_Wc5cVlOWwc3Cd4tMdydGvNuEPA8dtwX" },
+      { label: "六年級下學期", code: "math-6b", price: 110, short: "六下", preview: "1EBRloSaFGuC4HV4EvcO8lQQ1KIRpiKCm" },
     ],
   },
   {
@@ -271,24 +272,13 @@ const PRODUCTS = [
     name: "國語、社會考前複習包",
     tag: "三～六年級・分版本",
     desc: "段考前的重點整理與練習，依年級與教科書版本選購。",
-    // ※ 價格先暫定，請依實際售價修改
     options: [
-      { label: "三年級 國語（康軒）", code: "review-3-ch-k", price: 69 },
-      { label: "三年級 國語（南一）", code: "review-3-ch-n", price: 69 },
-      { label: "三年級 社會（康軒）", code: "review-3-so-k", price: 69 },
-      { label: "三年級 社會（南一）", code: "review-3-so-n", price: 69 },
-      { label: "四年級 國語（康軒）", code: "review-4-ch-k", price: 69 },
-      { label: "四年級 國語（南一）", code: "review-4-ch-n", price: 69 },
-      { label: "四年級 社會（康軒）", code: "review-4-so-k", price: 69 },
-      { label: "四年級 社會（南一）", code: "review-4-so-n", price: 69 },
-      { label: "五年級 國語（康軒）", code: "review-5-ch-k", price: 89 },
-      { label: "五年級 國語（南一）", code: "review-5-ch-n", price: 89 },
-      { label: "五年級 社會（康軒）", code: "review-5-so-k", price: 89 },
-      { label: "五年級 社會（南一）", code: "review-5-so-n", price: 89 },
-      { label: "六年級 國語（康軒）", code: "review-6-ch-k", price: 89 },
-      { label: "六年級 國語（南一）", code: "review-6-ch-n", price: 89 },
-      { label: "六年級 社會（康軒）", code: "review-6-so-k", price: 89 },
-      { label: "六年級 社會（南一）", code: "review-6-so-n", price: 89 },
+      { label: "上學期第一次期中｜三年級 國語（南一）", code: "review-3-ch-n", price: 89 },
+      { label: "上學期第一次期中｜四年級 國語（南一）", code: "review-4-ch-n", price: 89 },
+      { label: "上學期第一次期中｜五年級 國語（康軒）", code: "review-5-ch-k", price: 89 },
+      { label: "上學期第一次期中｜五年級 社會（康軒）", code: "review-5-so-k", price: 89 },
+      { label: "上學期第一次期中｜六年級 國語（康軒）", code: "review-6-ch-k", price: 89 },
+      { label: "上學期第一次期中｜六年級 社會（康軒）", code: "review-6-so-k", price: 89 },
     ],
   },
 ];
