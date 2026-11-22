@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>酥酥老師每日讀報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
+<style>
+/* VOICE: a real children's newspaper, warm because the teacher writes in its margins
+   IDEA: the front page of a daily paper — masthead, issue line, headline, photo with caption, columns, then a worksheet page
+   PICTURE: the story's photo slot drawn by hand (purple-lit harbour, light rail, a phone filming)
+   COLOUR and TYPE: newsprint ground, black ink, one red spot colour, blue-ink teacher notes; Noto Serif TC for print, Iansui (秋茄體 when installed) for the teacher's hand
+   LAYOUT: masthead > lead story with photo and columns > word column > idioms or grammar > worksheet > my scores > back issues */
+:root{color-scheme:light dark;
+ --paper:light-dark(#f4f2ec,#17181b);--sheet:light-dark(#fbfaf6,#1f2024);--ink:light-dark(#1b1b1b,#ecebe6);
+ --soft:light-dark(#5b5b5b,#a8a7a1);--rule:light-dark(#1b1b1b,#ecebe6);--hair:light-dark(#cfcbc0,#3a3b40);
+ --red:light-dark(#c8102e,#ff6075);--pen:light-dark(#2456a6,#8fb2ff);--note:light-dark(#fff3a8,#3d3820);
+ --hl:light-dark(rgba(255,206,0,.42),rgba(255,206,0,.28));--ok:light-dark(#1f7a45,#6fd39a);--no:light-dark(#c8102e,#ff6075)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.8 "Noto Serif TC","Songti TC",serif;overflow-x:clip}
+.hand{font-family:"曉聲通秋茄體","ToneOZ Tsuipita","Iansui","Noto Sans TC",sans-serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 max(4vw,16px)}
+button{font:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+/* masthead */
+.strip{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 16px;padding:10px 0;font-size:14px;border-bottom:1px solid var(--hair)}
+.strip .who{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{border:1.5px solid var(--ink);background:none;color:var(--ink);border-radius:999px;padding:6px 14px;min-height:40px;cursor:pointer;font-size:15px}
+.chip.red{border-color:var(--red);background:var(--red);color:#fff}
+.name{text-align:center;padding:18px 0 6px}
+.name h1{font-weight:900;font-size:clamp(40px,8vw,84px);line-height:1;margin:0;letter-spacing:.06em}
+.name p{margin:8px 0 0;font-size:15px;color:var(--soft)}
+.bar{border-top:4px double var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;margin-top:12px}
+.bar nav{display:flex;flex-wrap:wrap}
+.bar nav a{text-decoration:none;padding:8px 12px;min-height:44px;display:inline-flex;align-items:center}
+.bar nav a:hover{color:var(--red)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.switch{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.switch button{border:0;background:none;color:var(--ink);padding:6px 16px;min-height:40px;cursor:pointer}
+.switch button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+/* front page */
+.front{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(20px,3vw,36px);padding:24px 0 8px;border-bottom:1px solid var(--rule)}
+.kicker{color:var(--red);font-weight:700;font-size:15px;margin:0}
+.headline{font-weight:900;font-size:clamp(32px,4.6vw,50px);line-height:1.15;margin:6px 0 10px;text-wrap:balance}
+.deck{font-size:19px;line-height:1.6;margin:0 0 12px;color:var(--soft)}
+.byline{font-size:14px;color:var(--soft);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:6px 0;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.cols{columns:2 17em;column-gap:28px;column-rule:1px solid var(--hair)}
+.cols p{margin:0 0 .9em;text-align:justify}
+.cols p:first-child::first-letter{float:left;font-size:3.3em;line-height:.9;font-weight:900;margin:.06em .1em 0 0;color:var(--red)}
+.cols.en p{text-align:left;hyphens:auto}
+mark{background:linear-gradient(transparent 55%,var(--hl) 55%);color:inherit;padding:0 1px;cursor:help;white-space:nowrap}
+.cols u{text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}
+figure{margin:0}
+.photo{border:1px solid var(--rule);aspect-ratio:4/3;background:#3b2a6e}
+.photo svg{width:100%;height:100%;display:block}
+figcaption{font-size:14px;color:var(--soft);padding:6px 0 0;line-height:1.5}
+.note{background:var(--note);color:var(--ink);padding:14px 18px 16px;margin:20px 6px 4px;transform:rotate(-1.5deg);box-shadow:0 6px 14px rgba(0,0,0,.12);font-size:18px;line-height:1.6;position:relative}
+.note::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:rgba(255,255,255,.55);transform:rotate(2deg)}
+.note b{display:block;color:var(--pen);font-weight:400;font-size:20px}
+/* sections */
+.sect{padding:28px 0;border-bottom:1px solid var(--rule)}
+.sect>h2{font-weight:900;font-size:30px;line-height:1.2;margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.sect>h2 span{font-size:15px;font-weight:400;color:var(--soft)}
+.sect>.sub{margin:4px 0 18px;color:var(--soft);font-size:15px}
+.dict{columns:3 15em;column-gap:28px;column-rule:1px solid var(--hair)}
+.entry{break-inside:avoid;padding:10px 0;border-bottom:1px dotted var(--hair)}
+.entry b{font-size:22px;font-weight:900}
+.entry .zy{font-size:13px;color:var(--ink);margin-left:6px}
+.entry .pos{font-size:13px;color:var(--red);margin-left:6px;font-style:italic}
+.entry p{margin:2px 0 0;font-size:16px;line-height:1.6}
+.entry .ex{color:var(--soft);font-size:15px}
+.idioms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.idiom{background:var(--sheet);border:1px solid var(--rule);padding:18px 20px}
+.idiom h3{font-weight:900;font-size:28px;letter-spacing:.12em;margin:0 0 6px;line-height:1.3}
+.idiom dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:16px;line-height:1.6}
+.idiom dt{color:var(--red);white-space:nowrap}
+.idiom dd{margin:0}
+.gram{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.box{background:var(--sheet);border:1px solid var(--rule);padding:16px 18px}
+.box h3{margin:0 0 8px;font-size:19px}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-weight:400;font-size:14px;color:var(--soft);border-bottom:1.5px solid var(--rule)}
+/* worksheet */
+.sheet{background:var(--sheet);border:1px solid var(--rule);padding:clamp(16px,3vw,32px);background-image:repeating-linear-gradient(transparent 0 35px,var(--hair) 35px 36px)}
+.sec{font-weight:900;font-size:20px;margin:18px 0 8px;background:var(--sheet);display:inline-block;padding-right:8px}
+.sec:first-child{margin-top:0}
+.q{background:var(--sheet);border-left:3px solid var(--hair);padding:10px 14px;margin-bottom:12px}
+.q .t{margin:0 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{border:1.5px solid var(--hair);background:var(--paper);color:var(--ink);padding:6px 14px;min-height:44px;cursor:pointer;text-align:left;border-radius:4px}
+.opts button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.q input,.q select,.q textarea,.field input{font:inherit;font-size:16px;padding:6px 10px;min-height:44px;border:1.5px solid var(--hair);background:var(--paper);color:var(--ink);border-radius:4px}
+.q input,.q select{width:min(240px,100%)}
+.q textarea{width:100%;min-height:96px}
+.q.ok{border-left-color:var(--ok)}.q.no{border-left-color:var(--no)}
+.fb{font-size:16px;margin-top:6px;display:none;color:var(--pen)}
+.q.ok .fb,.q.no .fb{display:block}.q.ok .fb{color:var(--ok)}.q.no .fb{color:var(--no)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px;background:var(--sheet);padding:4px 0}
+.btn{border:0;background:var(--red);color:#fff;padding:10px 24px;min-height:44px;cursor:pointer;font-size:17px;border-radius:4px}
+.btn.ghost{background:none;color:var(--ink);border:1.5px solid var(--ink)}
+.score{font-size:24px;color:var(--red)}
+.msg{font-size:15px;color:var(--pen)}
+.past{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:0 28px}
+.past a{display:block;text-decoration:none;padding:12px 0;border-bottom:1px dotted var(--hair)}
+.past b{font-size:19px;display:block;line-height:1.4}
+.past small{color:var(--soft)}
+.empty{color:var(--soft);font-size:16px}
+footer{padding:20px 0 40px;font-size:14px;color:var(--soft)}
+footer a{word-break:break-all}
+/* login */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.overlay.on{display:flex}
+.modal{background:var(--sheet);color:var(--ink);border:1px solid var(--rule);padding:24px;width:min(420px,100%);box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.modal h2{margin:0 0 4px;font-size:26px;font-weight:900}
+.field{display:block;margin:12px 0}
+.field span{display:block;font-size:15px;color:var(--soft)}
+.field input{width:100%}
+/* printable sheet: rendered off-screen for PDF, shown only when printing */
+#print{position:absolute;left:-10000px;top:0;width:794px;color:#1b1b1b;font:14.5px/1.75 "Noto Serif TC",serif;color-scheme:light}
+#print .pg{width:794px;min-height:1123px;background:#fff;padding:40px 46px 64px;position:relative;margin-bottom:20px;display:flex;flex-direction:column}
+#print .hand{font-family:"曉聲通秋茄體","ToneOZ Tsuipita","Iansui",sans-serif}
+#print .pm{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:14px;border-bottom:5px solid #c8102e;padding-bottom:8px}
+#print .pm h1{margin:0;font-size:38px;font-weight:900;letter-spacing:.06em;line-height:1}
+#print .pm .ed{font-size:12px;color:#555;line-height:1.5}
+#print .pm .no{background:#c8102e;color:#fff;font-weight:900;font-size:15px;padding:6px 12px;line-height:1.3;text-align:center}
+#print .strip2{display:flex;justify-content:space-between;font-size:12px;color:#555;border-bottom:1px solid #1b1b1b;padding:4px 0;margin-bottom:16px}
+#print .kick{display:inline-block;background:#7a55d1;color:#fff;font-size:13px;padding:2px 10px;margin-bottom:6px}
+#print .hl{font-size:31px;font-weight:900;line-height:1.25;margin:0 0 6px}
+#print .dk{font-size:15px;color:#555;margin:0 0 14px;border-left:4px solid #7a55d1;padding-left:10px}
+#print .lead{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:22px}
+#print .cols2{columns:2;column-gap:20px;column-rule:1px solid #ddd}
+#print .cols2 p{margin:0 0 6px;text-align:justify}
+#print .cols2.one{columns:1}
+#print .cols2 p:first-child::first-letter{float:left;font-size:3em;line-height:.9;font-weight:900;margin:.06em .08em 0 0;color:#c8102e}
+#print mark{background:linear-gradient(transparent 55%,#ffe066 55%);color:inherit;white-space:nowrap;display:inline-block;line-height:1.3}
+#print u{text-decoration-color:#c8102e;text-decoration-thickness:2px;text-underline-offset:3px}
+#print .ph{border:1px solid #1b1b1b;aspect-ratio:4/3}
+#print .ph svg{width:100%;height:100%;display:block}
+#print .cap{font-size:11.5px;color:#666;line-height:1.5;margin:4px 0 14px}
+#print .sticky{background:#fff3a8;padding:12px 14px;transform:rotate(-1.5deg);font-size:15px;line-height:1.6;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+#print .sticky b{display:block;color:#2456a6;font-weight:400;font-size:17px}
+#print .think{margin-top:auto;border:2px dashed #7a55d1;border-radius:14px;padding:10px 16px;background:#f5f0ff}
+#print .think b{color:#7a55d1}
+#print .sh{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+#print .sh span{background:#2f7fc1;color:#fff;font-weight:900;font-size:17px;padding:4px 14px}
+#print .sh.red span{background:#c8102e}#print .sh.pur span{background:#7a55d1}
+#print .sh i{flex:1;border-top:2px solid currentColor;color:#ddd}
+#print .vg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+#print .vg.e3{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}#print .vg.e3 .vc{padding:6px 10px}
+#print .vc{border:1.5px solid #cfe3f4;background:#f2f8fd;border-radius:10px;padding:8px 12px;break-inside:avoid}
+#print .vc b{font-size:19px;font-weight:900}
+#print .vc .z{font-size:11px;color:#1b1b1b;margin-left:6px}
+#print .vc p{margin:0;font-size:13.5px;line-height:1.55}
+#print .vc .x{color:#555}
+#print .ig{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+#print .ic{border:2px solid #c8102e;border-radius:12px;overflow:hidden;background:#fff}
+#print .ic h3{margin:0;background:#c8102e;color:#fff;text-align:center;font-size:22px;letter-spacing:.14em;padding:6px 0;font-weight:900}
+#print .ic dl{margin:0;padding:8px 12px;font-size:13px;line-height:1.55;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px}
+#print .ic dt{color:#c8102e;font-weight:700;white-space:nowrap}#print .ic dd{margin:0}
+#print .gt{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#print .gb{border:2px solid #c8102e;border-radius:12px;padding:10px 14px}
+#print .gb h3{margin:0 0 6px;font-size:16px;color:#c8102e}
+#print table{border-collapse:collapse;width:100%;font-size:13px}
+#print th,#print td{border-bottom:1px solid #e3e3e3;padding:4px 6px;text-align:left;color:#1b1b1b}
+#print th{background:#fdecef;color:#c8102e;font-weight:700}
+#print .nm{display:flex;gap:24px;font-size:15px;margin-bottom:6px}
+#print .nm span{flex:1;border-bottom:1.5px solid #1b1b1b;padding-bottom:2px}
+#print .qs{font-weight:900;font-size:16px;color:#7a55d1;margin:8px 0 4px;border-bottom:2px solid #e6dcfa;padding-bottom:2px}
+#print .qq{margin:0 0 4px;break-inside:avoid;line-height:1.6}
+#print .qq p{margin:0}
+#print .op{font-size:13px;color:#444;padding-left:22px}
+#print .bx{display:inline-block;width:34px;height:22px;border:1.5px solid #1b1b1b;border-radius:4px;vertical-align:middle;margin-right:6px}
+#print .ln{border-bottom:1px solid #aaa;height:28px}
+#print .key{margin-top:auto;border-top:2px dashed #999;padding-top:8px;font-size:12px;color:#555;position:relative}
+#print .key::before{content:"✂ 答案可沿虛線剪下";position:absolute;top:-11px;left:0;background:#fff;padding-right:8px;font-size:11px}
+#print .ft{position:absolute;left:46px;right:46px;bottom:22px;display:flex;justify-content:space-between;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:6px}
+@media(max-width:760px){.front{grid-template-columns:minmax(0,1fr)}.front figure{order:-1}}
+@media(max-width:600px){.cols p{text-align:left}.strip{font-size:13px}}
+@media(prefers-reduced-motion:no-preference){.glow{animation:glow 3s ease-in-out infinite alternate}@keyframes glow{from{opacity:.3}to{opacity:.8}}}
+@page{size:A4;margin:0}
+@media print{body{background:#fff}body>*:not(#print){display:none!important}#print{position:static}#print .pg{margin:0;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="wrap">
+ <div class="strip">
+  <span id="issue"></span>
+  <div class="who"><span id="whoTxt" class="hand"></span><button class="chip" id="loginBtn" type="button">學生登入</button></div>
+ </div>
+ <div class="name"><h1>酥酥老師每日讀報</h1><p>給國小、國中生的時事報・每天一篇，讀懂世界、學好中英文</p></div>
+ <div class="bar">
+  <nav aria-label="主選單"><a href="#story">今日頭條</a><a href="#words">生詞</a><a href="#practice">練習題</a><a href="#scores">我的成績</a><a href="#past">往期</a></nav>
+  <div class="tools">
+   <div class="switch" role="group" aria-label="切換語言"><button id="bZh" type="button" aria-pressed="true">中文・國小</button><button id="bZj" type="button" aria-pressed="false">中文・國中</button><button id="bEn" type="button" aria-pressed="false">English</button></div>
+   <button class="chip red" id="pdfBtn" type="button">下載 PDF</button>
+   <button class="chip" id="printBtn" type="button" hidden>列印</button>
+  </div>
+ </div>
+ <p class="msg" id="pdfMsg" aria-live="polite"></p>
+</header>
+
+<main class="wrap">
+<article class="front" id="story">
+ <div>
+  <p class="kicker" id="kicker"></p>
+  <h2 class="headline" id="title"></h2>
+  <p class="deck" id="deck"></p>
+  <div class="byline" id="byline"></div>
+  <div class="cols" id="body"></div>
+ </div>
+ <aside>
+  <figure>
+   <div class="photo" aria-hidden="true">
+    <svg viewBox="0 0 400 300">
+     <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e2258"/><stop offset="1" stop-color="#a27ed6"/></linearGradient>
+     <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b8fd1"/><stop offset="1" stop-color="#244c86"/></linearGradient></defs>
+     <rect width="400" height="300" fill="url(#sky)"/>
+     <g fill="#fff" opacity=".8"><circle cx="40" cy="30" r="1.6"/><circle cx="120" cy="50" r="1.2"/><circle cx="300" cy="24" r="1.8"/><circle cx="360" cy="70" r="1.2"/><circle cx="220" cy="30" r="1.2"/></g>
+     <circle cx="330" cy="58" r="20" fill="#fff4d6"/>
+     <ellipse class="glow" cx="170" cy="120" rx="70" ry="90" fill="#d9b8ff" opacity=".5"/>
+     <path d="M150 210 L150 92 Q150 70 162 64 L162 42 L178 42 L178 64 Q190 70 190 92 L190 210 Z" fill="#5a3f9e" stroke="#1d1538" stroke-width="3" stroke-linejoin="round"/>
+     <path d="M162 100 L178 100 M162 125 L178 125 M162 150 L178 150 M162 175 L178 175" stroke="#e2c9ff" stroke-width="5" stroke-linecap="round"/>
+     <rect x="90" y="150" width="46" height="60" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
+     <rect x="202" y="140" width="40" height="70" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
+     <rect x="250" y="168" width="54" height="42" rx="4" fill="#7c63c4" stroke="#1d1538" stroke-width="3"/>
+     <g fill="#ffe9a8"><rect x="100" y="162" width="8" height="8" rx="2"/><rect x="118" y="178" width="8" height="8" rx="2"/><rect x="212" y="154" width="8" height="8" rx="2"/><rect x="224" y="178" width="8" height="8" rx="2"/><rect x="262" y="180" width="8" height="8" rx="2"/><rect x="282" y="180" width="8" height="8" rx="2"/></g>
+     <rect x="0" y="206" width="400" height="8" fill="#1d1538"/>
+     <rect x="20" y="182" width="120" height="26" rx="12" fill="#f4f1ea" stroke="#1d1538" stroke-width="3"/>
+     <rect x="20" y="194" width="120" height="5" fill="#7ac27f"/>
+     <g fill="#8fc3ef" stroke="#1d1538" stroke-width="2"><rect x="32" y="186" width="18" height="9" rx="2"/><rect x="58" y="186" width="18" height="9" rx="2"/><rect x="84" y="186" width="18" height="9" rx="2"/><rect x="110" y="186" width="18" height="9" rx="2"/></g>
+     <rect x="0" y="214" width="400" height="86" fill="url(#sea)"/>
+     <path d="M0 236 Q25 228 50 236 T100 236 T150 236 T200 236 T250 236 T300 236 T350 236 T400 236" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".7"/>
+     <path d="M0 262 Q25 254 50 262 T100 262 T150 262 T200 262 T250 262 T300 262 T350 262 T400 262" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".5"/>
+     <path d="M150 236 L190 236 L184 296 L156 296 Z" fill="#c7a6ff" opacity=".25"/>
+     <g transform="rotate(-8 330 220)">
+      <rect x="292" y="150" width="80" height="140" rx="14" fill="#1b1b1b" stroke="#fff" stroke-width="3"/>
+      <rect x="300" y="164" width="64" height="104" rx="6" fill="#f1ecfc"/>
+      <path d="M300 240 L320 214 L336 230 L350 210 L364 232 L364 268 L300 268 Z" fill="#a98ae6"/>
+      <circle cx="344" cy="186" r="9" fill="#fff4d6"/>
+      <circle cx="310" cy="174" r="4" fill="#c8102e"/>
+     </g>
+    </svg>
+   </div>
+   <figcaption id="caption"></figcaption>
+  </figure>
+  <div class="note hand"><b>酥酥老師的話</b><span id="teacherNote"></span></div>
+ </aside>
+</article>
+
+<section class="sect" id="words">
+ <h2 id="wH"></h2>
+ <p class="sub" id="wSub"></p>
+ <div class="dict" id="wordList"></div>
+</section>
+
+<section class="sect" id="extra"></section>
+
+<section class="sect" id="practice">
+ <h2 id="pH"></h2>
+ <p class="sub" id="pSub"></p>
+ <form class="sheet" id="quiz" novalidate></form>
+</section>
+
+<section class="sect" id="scores">
+ <h2>我的成績 <span id="scoreMode"></span></h2>
+ <p class="sub" id="scoreSub"></p>
+ <div id="scoreList"></div>
+</section>
+
+<section class="sect" id="past">
+ <h2>往期文章 <span>每天一篇</span></h2>
+ <div class="past" id="pastList"></div>
+</section>
+</main>
+
+<footer class="wrap">
+ <p id="src"></p>
+ <p>酥酥老師家教｜Instagram、Threads：@crispyyyyy0121</p>
+</footer>
+
+<div class="overlay" id="loginBox" role="dialog" aria-modal="true" aria-labelledby="lH">
+ <form class="modal" id="loginForm" novalidate>
+  <h2 id="lH">學生登入</h2>
+  <p class="sub" id="lSub" style="margin:0;color:var(--soft);font-size:15px"></p>
+  <label class="field"><span id="idLabel">學生代號</span><input id="sid" autocomplete="username" required></label>
+  <label class="field" id="pinField"><span>密碼（4 位數）</span><input id="pin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password"></label>
+  <p class="msg" id="loginMsg" aria-live="polite"></p>
+  <div class="actions" style="background:none"><button class="btn" type="submit">登入</button><button class="btn ghost" type="button" id="loginCancel">取消</button></div>
+ </form>
+</div>
+
+<div id="print" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+{
+/* 放上 GitHub Pages 後，把 Firebase 設定貼在這裡，就會改用雲端登入與成績紀錄。留空 = 成績只存在這台裝置。 */
+const FIREBASE_CONFIG=null;
+
+const ARTICLES=[{
+ id:"2026-11-22-bts-kaohsiung-vlog",no:1,date:"2026-11-22",cat:"文化・娛樂",level:"國小高年級～國中",
+ zh:{level:"國小高年級",edition:"中文・國小版",len:"約 450 字・閱讀約 4 分鐘",kicker:"文化・娛樂｜高雄",title:"一支手機影片，讓全世界看見高雄",
+  deck:"BTS 成員柾國利用休息日逛高雄，親手拍下的影片在一天內被上千萬人看見。",
+  caption:"插圖：紫色燈光下的高雄港邊。BTS 來台期間，85 大樓、愛河等地都亮起紫色。",
+  note:"讀完後，試著用三句話把這則新聞說給家人聽。畫線的詞語，看看能不能自己造句！",
+  body:[
+   "韓國人氣男團 BTS（防彈少年團）在 11 月 19、21、22 日，到高雄世運主場館舉辦三場演唱會。這是他們{相隔} 8 年再次來台灣表演，也是這次亞洲{巡迴}的第一站。為了歡迎他們，高雄的 85 大樓、愛河等地都亮起了 BTS 的代表色——紫色，有些路口的行人號誌甚至顯示「ARMY Go」，ARMY 就是 BTS 粉絲的名稱。",
+   "11 月 20 日是演唱會中間的休息日。成員柾國、Jimin 和 j-hope 趁著{空檔}走進高雄的大街小巷。他們去了駁二藝術特區，搭過輕軌，也到旗津的海邊吹風，還在一家開了七十多年的老店吃早餐、喝紅茶牛奶。",
+   "柾國一邊逛，一邊用手機和相機記錄看到的風景。當天晚上他親自{剪輯}，在 21 日凌晨把一支約 2 分鐘的影片上傳到 Instagram，標題是「在高雄的空閒時間」。影片用溫暖的{復古}色調，拍下腳踏車、機車、中文招牌和老街巷。背景音樂也很用心，選的是台灣吉他{演奏家}董運昌的作品〈碧海藍天〉。",
+   "影片裡還有一個讓人感動的畫面：許多粉絲雖然很想靠近偶像，卻自動站在一條看不見的線外，安靜又有{秩序}地等候。不少外國網友看了，都稱讚台灣粉絲很有禮貌。",
+   "這支影片上傳大約 10 小時，就有超過 300 萬人按讚，觀看次數超過 2000 萬。高雄市長也用韓文留言道謝。許多網友開玩笑說，這是高雄「最貴」的城市{宣傳}片。",
+   "一支用心拍的小影片，讓世界各地的人重新認識了高雄。原來，我們每天走過的街道，在別人眼中也可以這麼美。"],
+  words:[
+   ["巡迴","ㄒㄩㄣˊ ㄏㄨㄟˊ","到各地輪流表演或活動","劇團這個月在全台巡迴演出。"],
+   ["相隔","ㄒㄧㄤ ㄍㄜˊ","中間隔了（一段時間或距離）","兩個好朋友相隔三年才再見面。"],
+   ["空檔","ㄎㄨㄥˋ ㄉㄤˇ","忙碌中間空下來的時間","考試的空檔，我去圖書館借書。"],
+   ["剪輯","ㄐㄧㄢˇ ㄐㄧˊ","把影片或文章挑選、安排成完整作品","哥哥花了一整晚剪輯旅行影片。"],
+   ["復古","ㄈㄨˋ ㄍㄨˇ","模仿過去年代的風格","奶奶家的老時鐘很有復古風。"],
+   ["演奏家","ㄧㄢˇ ㄗㄡˋ ㄐㄧㄚ","專門彈奏樂器的人","這位鋼琴演奏家從五歲就開始練琴。"],
+   ["秩序","ㄓˋ ㄒㄩˋ","有條理、不混亂的樣子","大家排隊很有秩序，一下就進場了。"],
+   ["宣傳","ㄒㄩㄢ ㄔㄨㄢˊ","讓更多人知道、認識某件事","學校製作海報宣傳運動會。"]],
+  idioms:[
+   ["井然有序","整齊有條理，一點也不亂","粉絲安靜地站在線外等候","圖書館的書按照編號排得井然有序。"],
+   ["別出心裁","想法獨特，跟別人不一樣","柾國用台灣音樂當影片配樂","她的科展作品設計得別出心裁，得了第一名。"],
+   ["賓至如歸","客人來了就像回到自己家一樣舒服","高雄用紫色燈光歡迎 BTS","民宿主人很親切，讓我們感到賓至如歸。"]],
+  quiz:[
+   {k:"sec",t:"一、閱讀理解"},
+   {k:"mc",t:"BTS 這次在高雄舉辦幾場演唱會？",o:["一場","兩場","三場","八場"],a:2,why:"11 月 19、21、22 日，共三場。"},
+   {k:"mc",t:"柾國的影片是在什麼時候拍的？",o:["演唱會表演時","演唱會的休息日","搭飛機時","回韓國以後"],a:1,why:"11 月 20 日是休息日。"},
+   {k:"mc",t:"影片的背景音樂有什麼特別的地方？",o:["是 BTS 的新歌","是韓國民謠","是台灣音樂家的作品","是粉絲唱的歌"],a:2,why:"選用台灣吉他演奏家董運昌的〈碧海藍天〉。"},
+   {k:"mc",t:"為什麼外國網友稱讚台灣粉絲？",o:["喜歡尖叫","安靜有秩序地等候","送很多禮物","都會說韓文"],a:1,why:"粉絲自動站在線外，安靜等候。"},
+   {k:"sec",t:"二、詞語填空"},
+   {k:"sel",t:"下課的＿＿＿，我趕快去裝水。",o:["空檔","復古","巡迴"],a:0},
+   {k:"sel",t:"這支影片經過用心＿＿＿，變得更好看了。",o:["秩序","剪輯","相隔"],a:1},
+   {k:"sel",t:"社團同學在校門口發傳單，＿＿＿快要到來的校慶。",o:["宣傳","演奏家","復古"],a:0},
+   {k:"sec",t:"三、成語選填"},
+   {k:"sel",t:"飯店的服務人員熱情又貼心，讓旅客＿＿＿。",o:["井然有序","別出心裁","賓至如歸"],a:2},
+   {k:"sel",t:"這張生日卡片用樹葉做裝飾，真是＿＿＿。",o:["井然有序","別出心裁","賓至如歸"],a:1},
+   {k:"sec",t:"四、想一想"},
+   {k:"open",t:"如果你要拍一支影片，向外國朋友介紹你住的地方，你會拍哪三個畫面？為什麼？"}]},
+ zhj:{level:"國中",edition:"中文・國中版",len:"約 750 字・閱讀約 6 分鐘",kicker:"文化・城市｜高雄",title:"一支 Vlog 的城市魅力：柾國鏡頭下的高雄",
+  deck:"韓團 BTS 睽違八年來台開唱，成員柾國利用休息日拍下的高雄影片，意外成為全球矚目的城市宣傳。",
+  caption:"插圖：紫色燈光下的高雄港邊。演唱會前，85 大樓、愛河、大港橋等地標陸續點亮紫色。",
+  note:"讀完後想一想：作者為什麼說「真誠的分享」也有影響力？試著找出文章裡支持這個說法的證據。",
+  body:[
+   "11 月 19 日起，韓國男團 BTS 在高雄世運主場館一連舉辦三場《ARIRANG》世界巡迴演唱會。這不只是他們{睽違}八年再度來台，高雄更是這次亞洲巡演的首站。演唱會前，85 大樓、愛河、大港橋等地標陸續點亮紫色燈光，部分行人號誌也換上「ARMY Stop」「ARMY Go」的字樣，整座城市以實際行動，向這群遠道而來的歌手表達歡迎。",
+   "兩場演唱會之間的 20 日是休息日，柾國、Jimin 和 j-hope 走出飯店，在港都街頭{漫遊}。他們走訪駁二藝術特區、搭乘輕軌、到旗津海岸看海，也坐進一家經營超過七十年的老店，點了蛋餅和紅茶牛奶，像一般旅客一樣體驗在地生活。",
+   "當天深夜，柾國把自己用手機和相機拍下的片段，剪輯成一支兩分多鐘的 Vlog，在 21 日凌晨發布於 Instagram，命名為「在高雄的空閒時間」。影片以暖黃的復古色調，呈現腳踏車、機車、壁掛電風扇與中文招牌，畫面平凡，卻充滿台灣的{感性}。最令人驚喜的是配樂：他選用台灣吉他演奏家董運昌 2002 年的作品〈碧海藍天〉，讓影像與音樂相互呼應，處處可見{細膩}的巧思。",
+   "影片中還有一幕引起廣泛討論：大批粉絲雖然聚集在路旁，卻{自發}地站在一條看不見的界線外，安靜而有秩序地等候。不少海外網友留言稱讚，認為這展現了台灣粉絲的素養。",
+   "這支影片發布約十小時，按讚數便突破三百萬，觀看次數超過兩千萬，迅速成為國際{矚目}的焦點。高雄市長以韓文留言致謝；網友則笑稱，這是高雄「成本最高的城市宣傳片」，因為拍攝者是國際巨星。影片曝光後，許多粉絲依照畫面中的店家與景點前往{朝聖}，讓這些地方的人潮明顯增加。",
+   "一般的觀光{行銷}往往需要大筆預算，這支影片卻證明，真誠的觀察與分享，同樣具有強大的影響力。當我們用旅人的眼光重新看待身邊的街道，或許也會發現：那些習以為常的日常風景，正是一座城市最動人的地方。"],
+  words:[
+   ["睽違","ㄎㄨㄟˊ ㄨㄟˊ","分離、相隔（多指時間很久）","睽違十年，他終於回到故鄉。"],
+   ["漫遊","ㄇㄢˋ ㄧㄡˊ","沒有固定目的，隨意地遊覽","週末我們在老街漫遊了一整個下午。"],
+   ["感性","ㄍㄢˇ ㄒㄧㄥˋ","帶有情感、讓人有感觸的特質","這部電影充滿感性，看得我眼眶泛紅。"],
+   ["細膩","ㄒㄧˋ ㄋㄧˋ","細緻周到，連小地方都注意到","她的文筆細膩，描寫得非常生動。"],
+   ["自發","ㄗˋ ㄈㄚ","出於自己的意願，不是被要求","同學們自發地留下來整理教室。"],
+   ["矚目","ㄓㄨˇ ㄇㄨˋ","注視、特別受到重視","這場決賽受到全國矚目。"],
+   ["朝聖","ㄔㄠˊ ㄕㄥˋ","原指到聖地參拜；現在也指到喜愛的人事物相關地點參訪","很多影迷到電影拍攝地朝聖。"],
+   ["行銷","ㄒㄧㄥˊ ㄒㄧㄠ","推廣商品、服務或觀念，讓更多人接受","這家店很會用社群媒體行銷。"]],
+  idioms:[
+   ["按圖索驥","照著圖畫去找好馬；現多比喻按照線索去尋找","粉絲照著影片畫面去找店家","他拿著地圖按圖索驥，終於找到那家老書店。"],
+   ["相得益彰","兩者互相配合，使彼此的優點更加明顯","復古畫面配上台灣吉他音樂","這道菜的醬汁和食材相得益彰。"],
+   ["別出心裁","構想獨特，與眾不同","選用台灣音樂人的作品當配樂","這份報告的封面設計別出心裁。"],
+   ["井然有序","整齊有條理，一點也不亂","粉絲自發站在線外安靜等候","災後的物資發放井然有序。"]],
+  quiz:[
+   {k:"sec",t:"一、閱讀理解"},
+   {k:"mc",t:"根據第一段，高雄在這次 BTS 巡演中有什麼特別意義？",o:["巡演的最後一站","BTS 第一次來台灣","亞洲巡演的首站","唯一的戶外場地"],a:2,why:"文中提到高雄是這次亞洲巡演的首站。"},
+   {k:"mc",t:"第三段說配樂「處處可見細膩的巧思」，作者想表達什麼？",o:["選用台灣音樂與畫面呼應，顯示拍攝者的用心","這首音樂的版權很昂貴","柾國自己彈奏了吉他","影片的音樂比畫面更重要"],a:0,why:"台灣音樂配上台灣街景，兩者呼應。"},
+   {k:"mc",t:"網友說這是「成本最高的城市宣傳片」，這句話的語氣比較接近哪一種？",o:["批評浪費錢","擔心觀光客太多","抱怨影片太短","帶著幽默的讚美"],a:3,why:"用玩笑的方式稱讚影片的宣傳效果。"},
+   {k:"mc",t:"最後一段的主旨是什麼？",o:["觀光行銷一定要花大錢","真誠的觀察與分享也能產生影響力","只有明星才能宣傳城市","應該多拍影片賺取收入"],a:1},
+   {k:"sec",t:"二、詞語選填"},
+   {k:"sel",t:"兩位老同學＿＿＿二十年，終於在同學會上重逢。",o:["睽違","漫遊","矚目"],a:0},
+   {k:"sel",t:"這場比賽備受＿＿＿，全國觀眾都在關注結果。",o:["細膩","矚目","自發"],a:1},
+   {k:"sel",t:"沒有人要求，同學們卻＿＿＿組成了打掃小隊。",o:["朝聖","行銷","自發"],a:2},
+   {k:"sec",t:"三、成語選填"},
+   {k:"sel",t:"這幅畫的色彩與畫框搭配得＿＿＿，更顯得出色。",o:["按圖索驥","相得益彰","井然有序","別出心裁"],a:1},
+   {k:"sel",t:"他拿著網友整理的清單＿＿＿，一間一間找到影片裡的店。",o:["按圖索驥","相得益彰","井然有序","別出心裁"],a:0},
+   {k:"sec",t:"四、想一想"},
+   {k:"open",t:"你認為一支個人拍攝的影片，為什麼有時比傳統廣告更能打動人？請寫出兩個理由，並從文章中找一個例子支持。"}]},
+ en:{level:"國小高年級～國中",edition:"English Edition",len:"About 220 words・CEFR A2",kicker:"Culture・Kaohsiung",title:"Jungkook's Video Shows Kaohsiung to the World",
+  deck:"On his day off, BTS member Jungkook filmed Kaohsiung with his phone. Millions of people watched it in one day.",
+  caption:"Illustration: Kaohsiung harbour in purple light. The city lit up its landmarks for BTS.",
+  note:"畫底線的是過去式動詞，螢光筆畫的是生詞。讀完後，用過去式說說你昨天做了什麼！",
+  body:[
+   "BTS, a famous K-pop group from Korea, came to Taiwan in November. They {held} three {concert}s at Kaohsiung National Stadium. It was their first time in Taiwan in eight years. The city {welcomed} them with purple lights on tall buildings and along the Love River.",
+   "November 20 was a day off. Jungkook, Jimin, and j-hope {walked} around the city. They {visited} the Pier-2 Art Center, {rode} the light rail, and {went} to the beach in Cijin. They also {ate} breakfast at a very old shop and {drank} black tea with milk.",
+   "Jungkook {took} many videos with his phone and camera. That night, he {edited} them himself. Early the next morning, he {posted} a two-minute vlog on Instagram. He {called} it \"Free time in Kaohsiung.\" The video {showed} bikes, {scooter}s, old streets, and Chinese signs. For the music, he {chose} a song by a Taiwanese guitar player.",
+   "In the video, many fans {stood} quietly and {waited} {in order}. People around the world {said} Taiwanese fans were very {polite}.",
+   "In about ten hours, more than three million people {liked} the video. The {mayor} of Kaohsiung {thanked} Jungkook in Korean. A short video {helped} the world see how beautiful Kaohsiung is."],
+  words:[
+   ["concert","n.","演唱會","We went to a concert last night."],
+   ["welcome","v.","歡迎","The teacher welcomed the new student."],
+   ["visit","v.","拜訪、參觀","I visited my grandma on Sunday."],
+   ["edit","v.","剪輯、編輯","She edited her photos before posting them."],
+   ["post","v.","上傳、張貼","He posted a picture of his dog."],
+   ["scooter","n.","機車","Many people in Taiwan ride scooters."],
+   ["polite","adj.","有禮貌的","It is polite to say \"thank you.\""],
+   ["mayor","n.","市長","The mayor opened the new park."],
+   ["in order","phr.","有秩序地、按順序","Please line up in order."]],
+  grammar:{name:"過去式 Simple Past",
+   intro:"新聞講的是已經發生的事，所以動詞要用過去式。",
+   regular:[["一般加 -ed","walk → walked、visit → visited"],["字尾是 e，只加 -d","like → liked、welcome → welcomed"],["子音＋y 結尾，y 改 i 加 -ed","study → studied"]],
+   irregular:[["go","went","去"],["eat","ate","吃"],["drink","drank","喝"],["ride","rode","搭乘"],["take","took","拍、拿"],["choose","chose","選擇"],["stand","stood","站"],["hold","held","舉辦"]],
+   time:"yesterday、last night、last week、in November、two days ago"},
+  quiz:[
+   {k:"sec",t:"A. Reading — True or False"},
+   {k:"mc",t:"BTS held three concerts in Kaohsiung.",o:["True","False"],a:0},
+   {k:"mc",t:"Jungkook made the video on a concert day.",o:["True","False"],a:1,why:"He made it on his day off, November 20."},
+   {k:"mc",t:"The music in the video was by a Korean singer.",o:["True","False"],a:1,why:"It was by a Taiwanese guitar player."},
+   {k:"mc",t:"The mayor of Kaohsiung thanked Jungkook.",o:["True","False"],a:0},
+   {k:"sec",t:"B. Vocabulary — Choose the word"},
+   {k:"sel",t:"My dad rides a ___ to work every day.",o:["concert","scooter","mayor"],a:1},
+   {k:"sel",t:"Say \"please\" and \"thank you.\" Be ___.",o:["polite","visit","post"],a:0},
+   {k:"sel",t:"The ___ is the leader of a city.",o:["scooter","concert","mayor"],a:2},
+   {k:"sec",t:"C. Grammar — Write the simple past"},
+   {k:"txt",t:"Last night, I (watch) ___ a vlog.",a:"watched"},
+   {k:"txt",t:"We (go) ___ to the beach yesterday.",a:"went"},
+   {k:"txt",t:"She (eat) ___ a sandwich for breakfast.",a:"ate"},
+   {k:"txt",t:"They (take) ___ many photos in Kaohsiung.",a:"took"},
+   {k:"sec",t:"D. Write"},
+   {k:"open",t:"Write 2–3 sentences about a place you visited. Use the simple past."}]},
+ sources:[["中央社","https://www.cna.com.tw/news/amov/202611215002.aspx"],["NOWnews","https://www.nownews.com/news/6894220"],["Korea JoongAng Daily","https://www.koreajoongangdaily.com/entertainment/bts-to-kick-off-asian-leg-of-arirang-world-tour-as-kaohsiung-turns-purple/12980830"],["TVBS English","https://news.tvbs.com.tw/english/3099823"]]
+}];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const A=ARTICLES[0];
+const WEEK="日一二三四五六";
+const dateZh=d=>{const t=new Date(d+"T00:00:00");return `${t.getFullYear()} 年 ${t.getMonth()+1} 月 ${t.getDate()} 日 星期${WEEK[t.getDay()]}`};
+let lang="zh";try{lang=localStorage.getItem("dr-lang")||"zh"}catch(e){}
+if(!["zh","zhj","en"].includes(lang))lang="zh";
+const picks={};
+
+/* ---------- storage: local device, or Firebase when configured ---------- */
+const Store={
+ cloud:false,fs:null,user:null,
+ async init(){
+  try{this.user=JSON.parse(localStorage.getItem("dr-user")||"null")}catch(e){}
+  if(!FIREBASE_CONFIG)return;
+  try{
+   await loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
+   await loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js");
+   firebase.initializeApp(FIREBASE_CONFIG);this.fs=firebase.firestore();this.cloud=true;
+  }catch(e){this.cloud=false}
+ },
+ async login(id,pin){
+  id=id.trim();
+  if(!id)throw new Error(this.cloud?"請輸入學生代號":"請輸入你的名字");
+  if(this.cloud){
+   const snap=await this.fs.collection("students").doc(id).get();
+   if(!snap.exists||String(snap.data().pin)!==String(pin).trim())throw new Error("代號或密碼不對，請再試一次");
+   this.user={id,name:snap.data().name||id};
+  }else this.user={id,name:id};
+  try{localStorage.setItem("dr-user",JSON.stringify(this.user))}catch(e){}
+ },
+ logout(){this.user=null;try{localStorage.removeItem("dr-user")}catch(e){}},
+ async save(rec){
+  if(!this.user)return;
+  rec.student=this.user.id;rec.at=new Date().toISOString();
+  if(this.cloud){await this.fs.collection("scores").add(rec);return}
+  const k="dr-scores-"+this.user.id;let arr=[];
+  try{arr=JSON.parse(localStorage.getItem(k)||"[]")}catch(e){}
+  arr.push(rec);try{localStorage.setItem(k,JSON.stringify(arr))}catch(e){}
+ },
+ async list(){
+  if(!this.user)return[];
+  if(this.cloud){
+   const q=await this.fs.collection("scores").where("student","==",this.user.id).get();
+   return q.docs.map(d=>d.data()).sort((a,b)=>b.at.localeCompare(a.at));
+  }
+  try{return JSON.parse(localStorage.getItem("dr-scores-"+this.user.id)||"[]").reverse()}catch(e){return[]}
+ }
+};
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+
+/* ---------- render ---------- */
+function tip(w){const h=A[lang].words.find(x=>x[0]===w);return h?h[2]:""}
+function bodyHtml(paras){return paras.map(p=>"<p>"+esc(p).replace(/\{([^}]+)\}/g,(m,w)=>{const t=tip(w);return t?`<mark title="${esc(t)}">${w}</mark>`:`<u>${w}</u>`})+"</p>").join("")}
+
+function render(){
+ const L=A[lang],zh=lang!=="en";
+ document.documentElement.lang=zh?"zh-Hant":"en";
+ $("bZh").setAttribute("aria-pressed",lang==="zh");$("bZj").setAttribute("aria-pressed",lang==="zhj");$("bEn").setAttribute("aria-pressed",lang==="en");
+ $("issue").textContent=`第 ${A.no} 期・${dateZh(A.date)}`;
+ $("kicker").textContent=L.kicker;$("title").textContent=L.title;$("deck").textContent=L.deck;
+ $("byline").innerHTML=`<span>文／酥酥老師改寫</span><span>${L.edition}</span><span>適讀：${L.level}</span><span>${L.len}</span>`;
+ $("body").className="cols"+(zh?"":" en");$("body").innerHTML=bodyHtml(L.body);
+ $("caption").textContent=L.caption;$("teacherNote").textContent=L.note;
+ $("wH").innerHTML=zh?"生詞欄 <span>文章裡畫螢光筆的詞</span>":"Word Bank <span>英文生詞</span>";
+ $("wSub").textContent=zh?"附注音、意思和例句。":"附詞性、中文和例句。";
+ $("wordList").innerHTML=L.words.map(w=>zh
+  ?`<div class="entry"><b>${w[0]}</b><span class="zy">${w[1]}</span><p>${w[2]}</p><p class="ex">例：${w[3]}</p></div>`
+  :`<div class="entry"><b>${w[0]}</b><span class="pos">${w[1]}</span><p>${w[2]}</p><p class="ex">${esc(w[3])}</p></div>`).join("");
+ if(zh){
+  $("extra").innerHTML=`<h2>成語小教室 <span>三個成語都能用來描述今天的新聞</span></h2><p class="sub"></p><div class="idioms">${
+   L.idioms.map(r=>`<div class="idiom"><h3>${r[0]}</h3><dl><dt>意思</dt><dd>${r[1]}</dd><dt>新聞裡</dt><dd>${r[2]}</dd><dt>造句</dt><dd>${r[3]}</dd></dl></div>`).join("")}</div>`;
+ }else{
+  const G=L.grammar;
+  $("extra").innerHTML=`<h2>文法專欄 <span>${G.name}</span></h2><p class="sub">${G.intro}</p><div class="gram">
+   <div class="box"><h3>1. 規則動詞：加 -ed</h3><table><tbody>${G.regular.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</tbody></table>
+   <h3 style="margin-top:14px">3. 常搭配的時間詞</h3><p style="margin:0">${G.time}</p></div>
+   <div class="box"><h3>2. 不規則動詞：要背起來</h3><table><thead><tr><th>原形</th><th>過去式</th><th>中文</th></tr></thead><tbody>${
+    G.irregular.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div></div>`;
+ }
+ $("pH").innerHTML=zh?"練習題 <span>寫完按「對答案」</span>":"Exercises <span>寫完按「對答案」</span>";
+ $("pSub").textContent=Store.user?`${Store.user.name}，答完後成績會自動記錄。`:"登入後，答題成績會自動記錄在「我的成績」。";
+ let n=0;
+ $("quiz").innerHTML=L.quiz.map(q=>{
+  if(q.k==="sec")return `<p class="sec">${esc(q.t)}</p>`;
+  const i=n++;let b="";
+  if(q.k==="mc")b=`<div class="opts">${q.o.map((o,j)=>`<button type="button" data-q="${i}" data-o="${j}" aria-pressed="false">${"ABCD"[j]}. ${esc(o)}</button>`).join("")}</div>`;
+  if(q.k==="sel")b=`<select id="q${i}" aria-label="選擇答案"><option value="">請選擇</option>${q.o.map((o,j)=>`<option value="${j}">${esc(o)}</option>`).join("")}</select>`;
+  if(q.k==="txt")b=`<input id="q${i}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="填寫答案">`;
+  if(q.k==="open")b=`<textarea id="q${i}" aria-label="寫下你的想法" placeholder="${zh?"這題沒有標準答案，寫下你的想法":"Write your answer here"}"></textarea>`;
+  return `<div class="q" id="box${i}"><p class="t">${i+1}. ${esc(q.t)}</p>${b}<div class="fb" id="fb${i}"></div></div>`;
+ }).join("")+`<div class="actions"><button class="btn" type="submit">對答案</button><button class="btn ghost" type="button" id="reset">重新作答</button><span class="score" id="score" aria-live="polite"></span></div>`;
+ $("pastList").innerHTML=ARTICLES.map(a=>`<a href="#story"><small>第 ${a.no} 期・${a.date.replace(/-/g,"/")}・${a.cat}</small><b>${esc(a.zh.title)}</b><small>${esc(a.en.title)}</small></a>`).join("");
+ $("src").innerHTML="本期文章依下列報導改寫，未照搬原文："+A.sources.map(s=>`<a href="${s[1]}">${esc(s[0])}</a>`).join("、");
+ renderUser();buildPrint();
+}
+
+function renderUser(){
+ const u=Store.user;
+ $("whoTxt").textContent=u?`${u.name} 同學，今天也一起讀報吧！`:"";
+ $("loginBtn").textContent=u?"登出":"學生登入";
+ $("scoreMode").textContent=Store.cloud?"・雲端紀錄":"・存在這台裝置";
+ renderScores();
+}
+async function renderScores(){
+ if(!Store.user){$("scoreSub").textContent="";$("scoreList").innerHTML=`<p class="empty">還沒登入。按右上角「學生登入」，答題成績就會記錄在這裡。</p>`;return}
+ $("scoreSub").textContent=Store.cloud?"老師也看得到你的成績。":"目前成績只存在這台裝置；換裝置或清除瀏覽紀錄後會不見。";
+ let rows=[];try{rows=await Store.list()}catch(e){$("scoreList").innerHTML=`<p class="empty">成績暫時讀不到，請稍後再試。</p>`;return}
+ if(!rows.length){$("scoreList").innerHTML=`<p class="empty">還沒有紀錄。完成今天的練習題，按「對答案」就會出現。</p>`;return}
+ $("scoreList").innerHTML=`<table><thead><tr><th>日期</th><th>文章</th><th>版本</th><th style="text-align:right">分數</th></tr></thead><tbody>${
+  rows.map(r=>`<tr><td style="white-space:nowrap">${esc(r.at.slice(0,10).replace(/-/g,"/"))}</td><td>${esc(r.title)}</td><td style="white-space:nowrap">${({zh:"中文・國小",zhj:"中文・國中",en:"英文"})[r.lang]||r.lang}</td><td style="text-align:right;white-space:nowrap">${r.right} / ${r.total}</td></tr>`).join("")}</tbody></table>`;
+}
+
+/* ---------- printable sheet ---------- */
+function buildPrint(){
+ const L=A[lang],zh=lang!=="en",pages=3;
+ const mast=`<div class="pm"><div class="no">第 ${A.no} 期</div><div><h1>酥酥老師每日讀報</h1></div><div class="ed">${dateZh(A.date)}<br>適讀：${L.level}</div></div>
+  <div class="strip2"><span>給國小、國中生的時事報・每天一篇</span><span>${L.edition}</span></div>`;
+ const foot=p=>`<div class="ft"><span>酥酥老師每日讀報｜IG、Threads @crispyyyyy0121</span><span>${p} / ${pages}</span></div>`;
+ const svg=document.querySelector(".photo svg").outerHTML.replace(/id="sky"/,'id="psky"').replace(/url\(#sky\)/,"url(#psky)").replace(/id="sea"/,'id="psea"').replace(/url\(#sea\)/,"url(#psea)").replace(/ class="glow"/,"");
+ const think=zh?"讀完後，用三句話把這則新聞說給家人聽。":"Tell your family about this news in three sentences.";
+ const p1=`<section class="pg">${mast}
+  <span class="kick">${esc(L.kicker)}</span>
+  <h2 class="hl">${esc(L.title)}</h2>
+  <p class="dk">${esc(L.deck)}</p>
+  <div class="lead"><div class="cols2${zh?"":" one"}">${bodyHtml(L.body)}</div>
+   <div><div class="ph">${svg}</div><p class="cap">${esc(L.caption)}</p><div class="sticky hand"><b>酥酥老師的話</b>${esc(L.note)}</div></div></div>
+  <div class="think hand" style="margin-top:12px"><b>想一想：</b>${think}</div>
+  ${foot(1)}</section>`;
+ const vocab=L.words.map(w=>zh
+  ?`<div class="vc"><b>${w[0]}</b><span class="z">${w[1]}</span><p>${w[2]}</p><p class="x">例：${w[3]}</p></div>`
+  :`<div class="vc"><b>${w[0]}</b><span class="z">${w[1]}</span><p>${w[2]}</p><p class="x">${esc(w[3])}</p></div>`).join("");
+ let extra;
+ if(zh){
+  extra=`<div class="sh red"><span>成語小教室</span><i></i></div><div class="ig" style="grid-template-columns:repeat(${L.idioms.length===4?2:3},1fr)">${L.idioms.map(r=>`<div class="ic"><h3>${r[0]}</h3><dl><dt>意思</dt><dd>${r[1]}</dd><dt>新聞裡</dt><dd>${r[2]}</dd><dt>造句</dt><dd>${r[3]}</dd></dl></div>`).join("")}</div>${L.idioms.length<4?`
+   <div class="think hand" style="margin-top:22px"><b>換你造句：</b>從上面選一個成語，寫一個自己的句子。<div class="ln"></div><div class="ln"></div></div>`:""}`;
+ }else{
+  const G=L.grammar;
+  extra=`<div class="sh red"><span>文法專欄：${G.name}</span><i></i></div><p style="margin:0 0 6px">${G.intro}</p>
+   <div class="gt"><div class="gb"><h3>1. 規則動詞：加 -ed</h3><table><tbody>${G.regular.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</tbody></table>
+    <h3 style="margin-top:12px">3. 常搭配的時間詞</h3><p style="margin:0;font-size:13px">${G.time}</p></div>
+   <div class="gb"><h3>2. 不規則動詞：要背起來</h3><table><thead><tr><th>原形</th><th>過去式</th><th>中文</th></tr></thead><tbody>${G.irregular.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div></div>
+   <div class="think hand" style="margin-top:12px"><b>換你寫：</b>用過去式寫一句你昨天做的事。<div class="ln"></div><div class="ln"></div></div>`;
+ }
+ const p2=`<section class="pg">${mast}<div class="sh"><span>${zh?"生詞欄":"Word Bank"}</span><i></i></div><div class="vg${zh?"":" e3"}">${vocab}</div>${extra}${foot(2)}</section>`;
+ let n=0;
+ const qs=L.quiz.map(q=>{
+  if(q.k==="sec")return `<div class="qs">${esc(q.t)}</div>`;
+  const i=++n;let o="";
+  if(q.k==="mc")o=`<p class="op">${q.o.map((x,j)=>`（${"ABCD"[j]}）${esc(x)}`).join("　")}</p>`;
+  if(q.k==="sel")o=`<p class="op">選項：${q.o.map(esc).join("／")}</p>`;
+  if(q.k==="open")o=`<div class="ln"></div><div class="ln"></div><div class="ln"></div>`;
+  const pre=q.k==="mc"?'<span class="bx"></span>':"";
+  return `<div class="qq"><p>${pre}${i}. ${esc(q.t)}</p>${o}</div>`;
+ }).join("");
+ const ans=L.quiz.filter(q=>q.k!=="sec").map((q,i)=>`${i+1}. ${q.k==="txt"?q.a:q.k==="open"?"自由作答":q.k==="mc"?"ABCD"[q.a]:q.o[q.a]}`).join("　");
+ const p3=`<section class="pg">${mast}<div class="sh pur"><span>${zh?"練習題":"Exercises"}</span><i></i></div>
+  <div class="nm"><span>姓名：</span><span>日期：</span><span>得分：</span></div>${qs}
+  <div class="key"><b>參考答案</b>　${ans}<br>資料來源：${A.sources.map(s=>s[0]).join("、")}</div>${foot(3)}</section>`;
+ $("print").innerHTML=p1+p2+p3;
+}
+
+async function makePdf(){
+ const msg=$("pdfMsg"),btn=$("pdfBtn");
+ if(!window.html2canvas||!window.jspdf){msg.textContent="PDF 工具還沒載入完成，請稍後再按一次。";return}
+ btn.disabled=true;msg.textContent="正在製作 PDF，請稍等幾秒……";
+ try{
+  await document.fonts.ready;
+  const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:"pt",format:"a4"});
+  const PW=pdf.internal.pageSize.getWidth(),PH=pdf.internal.pageSize.getHeight();
+  const pgs=[...$("print").querySelectorAll(".pg")];
+  for(let i=0;i<pgs.length;i++){
+   const c=await html2canvas(pgs[i],{scale:2,backgroundColor:"#ffffff",logging:false});
+   let w=PW,h=c.height*PW/c.width;
+   if(h>PH){w=w*PH/h;h=PH}
+   if(i>0)pdf.addPage();
+   pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",(PW-w)/2,0,w,h);
+  }
+  const name=`每日讀報_${A.date}_${({zh:"中文國小版",zhj:"中文國中版",en:"英文版"})[lang]}.pdf`;
+  const cl=window.claude&&window.claude.use?await window.claude.use("downloads"):null;
+  if(cl){await cl.save({filename:name,data:pdf.output("blob")});msg.textContent="PDF 已準備好。"}
+  else{pdf.save(name);msg.textContent="PDF 已下載。"}
+ }catch(e){msg.textContent="這次沒有存成功，可以再試一次。"}
+ btn.disabled=false;
+}
+
+/* ---------- events ---------- */
+function setLang(l){lang=l;try{localStorage.setItem("dr-lang",l)}catch(e){}for(const k in picks)delete picks[k];render()}
+$("bZh").addEventListener("click",()=>setLang("zh"));
+$("bZj").addEventListener("click",()=>setLang("zhj"));
+$("bEn").addEventListener("click",()=>setLang("en"));
+$("pdfBtn").addEventListener("click",makePdf);
+if(window.self===window.top){$("printBtn").hidden=false;$("printBtn").addEventListener("click",()=>window.print())}
+
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".opts button");
+ if(b){const q=b.dataset.q;picks[q]=+b.dataset.o;b.parentNode.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("box"+q).classList.remove("ok","no");return}
+ if(e.target.id==="reset"){for(const k in picks)delete picks[k];render();$("practice").scrollIntoView({behavior:"smooth"})}
+});
+$("quiz").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const qs=A[lang].quiz.filter(q=>q.k!=="sec");let right=0,total=0;
+ qs.forEach((q,i)=>{
+  const box=$("box"+i),fb=$("fb"+i);box.classList.remove("ok","no");
+  if(q.k==="open"){if($("q"+i).value.trim()){box.classList.add("ok");fb.textContent="寫得好！可以拿給老師看看。"}return}
+  total++;let ans=null;
+  if(q.k==="mc")ans=picks[i]===undefined?null:picks[i];
+  if(q.k==="sel")ans=$("q"+i).value===""?null:+$("q"+i).value;
+  if(q.k==="txt")ans=$("q"+i).value.trim().toLowerCase();
+  const ok=ans===q.a;if(ok)right++;
+  box.classList.add(ok?"ok":"no");
+  fb.textContent=(ok?"答對了！":"正確答案："+(q.k==="txt"?q.a:q.o[q.a]))+(q.why?"　"+q.why:"");
+ });
+ $("score").textContent=`${right} / ${total} 題答對`;
+ if(Store.user){
+  try{await Store.save({article:A.id,title:A[lang].title,lang,right,total});$("score").textContent+="・已記錄";renderScores()}
+  catch(err){$("score").textContent+="・這次沒記錄到"}
+ }else $("score").textContent+="・登入後可記錄成績";
+});
+
+function openLogin(){
+ $("lSub").textContent=Store.cloud?"輸入老師給你的學生代號和密碼。":"輸入你的名字。成績會存在這台裝置上。";
+ $("idLabel").textContent=Store.cloud?"學生代號":"你的名字";
+ $("pinField").hidden=!Store.cloud;$("loginMsg").textContent="";
+ $("loginBox").classList.add("on");$("sid").focus();
+}
+$("loginBtn").addEventListener("click",()=>{if(Store.user){Store.logout();render()}else openLogin()});
+$("loginCancel").addEventListener("click",()=>$("loginBox").classList.remove("on"));
+$("loginBox").addEventListener("keydown",e=>{if(e.key==="Escape")$("loginBox").classList.remove("on")});
+$("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();$("loginMsg").textContent="登入中……";
+ try{await Store.login($("sid").value,$("pin").value);$("loginBox").classList.remove("on");$("sid").value="";$("pin").value="";render()}
+ catch(err){$("loginMsg").textContent=err.message||"登入失敗，請再試一次"}
+});
+
+render();
+Store.init().then(render);
+}
+</script>
+</body>
+</html>
