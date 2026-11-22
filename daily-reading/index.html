@@ -6,7 +6,7 @@
 <title>酥酥老師每日讀報</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bpmf+Iansui&family=Iansui&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="fonts.css">
 <style>
 /* VOICE: a real children's newspaper, warm because the teacher writes in its margins
@@ -113,6 +113,20 @@ th{font-weight:400;font-size:14px;color:var(--soft);border-bottom:1.5px solid va
 .empty{color:var(--soft);font-size:16px}
 footer{padding:20px 0 40px;font-size:14px;color:var(--soft)}
 footer a{word-break:break-all}
+/* zhuyin mode */
+#bpmfBtn[aria-pressed=true]{background:var(--pen);border-color:var(--pen);color:#fff}
+body.bpmf:not([data-lang=en]) :is(#title,#deck,#body,#caption,#teacherNote,#wordList,#extra,#quiz){font-family:"Bpmf Iansui","Iansui",sans-serif}
+body.bpmf:not([data-lang=en]) #title{font-weight:400;line-height:1.35}
+body.bpmf:not([data-lang=en]) #body{columns:1;font-size:20px;line-height:2.2}
+body.bpmf:not([data-lang=en]) #body p{text-align:left}
+body.bpmf:not([data-lang=en]) :is(.entry p,.idiom dl,.q){line-height:2}
+body.bpmf:not([data-lang=en]) :is(.idiom h3,.entry b,.sec,.sect>h2){font-weight:400}
+#print.bpmf :is(.hl,.dk,.cols2,.cap,.sticky,.think,.vc,.ic,.qq,.qs,.op){font-family:"Bpmf Iansui","Iansui",sans-serif}
+#print.bpmf :is(.hl,.ic h3,.vc b,.qs){font-weight:400}
+#print.bpmf .cols2{columns:1;font-size:15.5px;line-height:2.05}
+#print.bpmf .cols2 p{text-align:left}
+#print.bpmf .lead{grid-template-columns:minmax(0,1fr) 210px;gap:18px}
+#print.bpmf :is(.vc p,.ic dl,.qq){line-height:1.9}
 /* login */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
 .overlay.on{display:flex}
@@ -198,6 +212,7 @@ footer a{word-break:break-all}
   <nav aria-label="主選單"><a href="#story">今日頭條</a><a href="#words">生詞</a><a href="#practice">練習題</a><a href="#scores">我的成績</a><a href="#past">往期</a></nav>
   <div class="tools">
    <div class="switch" role="group" aria-label="切換語言"><button id="bZh" type="button" aria-pressed="true">中文・國小</button><button id="bZj" type="button" aria-pressed="false">中文・國中</button><button id="bEn" type="button" aria-pressed="false">English</button></div>
+   <button class="chip" id="bpmfBtn" type="button" aria-pressed="false" title="在國字旁邊加上注音">ㄅ 注音</button>
    <button class="chip red" id="pdfBtn" type="button">下載 PDF</button>
    <button class="chip" id="printBtn" type="button" hidden>列印</button>
   </div>
@@ -436,6 +451,7 @@ const A=ARTICLES[0];
 const WEEK="日一二三四五六";
 const dateZh=d=>{const t=new Date(d+"T00:00:00");return `${t.getFullYear()} 年 ${t.getMonth()+1} 月 ${t.getDate()} 日 星期${WEEK[t.getDay()]}`};
 let lang="zh";try{lang=localStorage.getItem("dr-lang")||"zh"}catch(e){}
+let bpmf=false;try{bpmf=localStorage.getItem("dr-bpmf")==="1"}catch(e){}
 if(!["zh","zhj","en"].includes(lang))lang="zh";
 const picks={};
 
@@ -488,6 +504,8 @@ function bodyHtml(paras){return paras.map(p=>"<p>"+esc(p).replace(/\{([^}]+)\}/g
 function render(){
  const L=A[lang],zh=lang!=="en";
  document.documentElement.lang=zh?"zh-Hant":"en";
+ document.body.dataset.lang=lang;document.body.classList.toggle("bpmf",bpmf);
+ $("bpmfBtn").hidden=!zh;$("bpmfBtn").setAttribute("aria-pressed",bpmf);
  $("bZh").setAttribute("aria-pressed",lang==="zh");$("bZj").setAttribute("aria-pressed",lang==="zhj");$("bEn").setAttribute("aria-pressed",lang==="en");
  $("issue").textContent=`第 ${A.no} 期・${dateZh(A.date)}`;
  $("kicker").textContent=L.kicker;$("title").textContent=L.title;$("deck").textContent=L.deck;
@@ -555,7 +573,7 @@ function buildPrint(){
   <span class="kick">${esc(L.kicker)}</span>
   <h2 class="hl">${esc(L.title)}</h2>
   <p class="dk">${esc(L.deck)}</p>
-  <div class="lead"><div class="cols2${zh?"":" one"}">${bodyHtml(L.body)}</div>
+  <div class="lead"><div class="cols2${zh?"":" one"}" data-flow>${bodyHtml(L.body)}</div>
    <div><div class="ph">${svg}</div><p class="cap">${esc(L.caption)}</p><div class="sticky hand"><b>酥酥老師的話</b>${esc(L.note)}</div></div></div>
   <div class="think hand" style="margin-top:12px"><b>想一想：</b>${think}</div>
   ${foot(1)}</section>`;
@@ -574,7 +592,7 @@ function buildPrint(){
    <div class="gb"><h3>2. 不規則動詞：要背起來</h3><table><thead><tr><th>原形</th><th>過去式</th><th>中文</th></tr></thead><tbody>${G.irregular.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div></div>
    <div class="think hand" style="margin-top:12px"><b>換你寫：</b>用過去式寫一句你昨天做的事。<div class="ln"></div><div class="ln"></div></div>`;
  }
- const p2=`<section class="pg">${mast}<div class="sh"><span>${zh?"生詞欄":"Word Bank"}</span><i></i></div><div class="vg${zh?"":" e3"}">${vocab}</div>${extra}${foot(2)}</section>`;
+ const p2=`<section class="pg">${mast}<div data-flow><div class="sh"><span>${zh?"生詞欄":"Word Bank"}</span><i></i></div><div class="vg${zh?"":" e3"}">${vocab}</div>${extra}</div>${foot(2)}</section>`;
  let n=0;
  const qs=L.quiz.map(q=>{
   if(q.k==="sec")return `<div class="qs">${esc(q.t)}</div>`;
@@ -587,9 +605,33 @@ function buildPrint(){
  }).join("");
  const ans=L.quiz.filter(q=>q.k!=="sec").map((q,i)=>`${i+1}. ${q.k==="txt"?q.a:q.k==="open"?"自由作答":q.k==="mc"?"ABCD"[q.a]:q.o[q.a]}`).join("　");
  const p3=`<section class="pg">${mast}<div class="sh pur"><span>${zh?"練習題":"Exercises"}</span><i></i></div>
-  <div class="nm"><span>姓名：</span><span>日期：</span><span>得分：</span></div>${qs}
+  <div class="nm"><span>姓名：</span><span>日期：</span><span>得分：</span></div><div data-flow>${qs}</div>
   <div class="key"><b>參考答案</b>　${ans}<br>資料來源：${A.sources.map(s=>s[0]).join("、")}</div>${foot(3)}</section>`;
  $("print").innerHTML=p1+p2+p3;
+ $("print").classList.toggle("bpmf",bpmf&&zh);
+}
+
+/* split any printed page that runs past A4 onto a continuation page */
+function paginate(){
+ const root=$("print"),MAX=1150;
+ for(let guard=0;guard<12;guard++){
+  const pg=[...root.querySelectorAll(".pg")].find(p=>p.offsetHeight>MAX&&p.querySelector("[data-flow]"));
+  if(!pg)break;
+  const flow=pg.querySelector("[data-flow]");
+  const np=document.createElement("section");np.className="pg";
+  np.innerHTML=pg.querySelector(".pm").outerHTML+pg.querySelector(".strip2").outerHTML+'<p style="margin:0 0 8px;font-size:12px;color:#888">（接上頁）</p>';
+  const nf=document.createElement("div");nf.className=flow.className;nf.setAttribute("data-flow","");np.appendChild(nf);
+  let top=flow;while(top.parentElement!==pg)top=top.parentElement;
+  let sib=top.nextElementSibling;const tail=[];
+  while(sib){const nx=sib.nextElementSibling;if(!sib.classList.contains("ft"))tail.push(sib);sib=nx}
+  tail.forEach(t=>np.appendChild(t));
+  pg.after(np);
+  while(pg.offsetHeight>MAX&&flow.children.length>1)nf.prepend(flow.lastElementChild);
+  if(!nf.children.length&&!tail.length){np.remove();break}
+ }
+ const all=[...root.querySelectorAll(".pg")];
+ all.forEach((p,i)=>{let f=p.querySelector(".ft");if(!f){f=document.createElement("div");f.className="ft";p.appendChild(f)}
+  f.innerHTML=`<span>酥酥老師每日讀報｜IG、Threads @crispyyyyy0121</span><span>${i+1} / ${all.length}</span>`});
 }
 
 async function makePdf(){
@@ -597,7 +639,7 @@ async function makePdf(){
  if(!window.html2canvas||!window.jspdf){msg.textContent="PDF 工具還沒載入完成，請稍後再按一次。";return}
  btn.disabled=true;msg.textContent="正在製作 PDF，請稍等幾秒……";
  try{
-  await document.fonts.ready;
+  buildPrint();await new Promise(r=>setTimeout(r,50));await document.fonts.ready;paginate();
   const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:"pt",format:"a4"});
   const PW=pdf.internal.pageSize.getWidth(),PH=pdf.internal.pageSize.getHeight();
   const pgs=[...$("print").querySelectorAll(".pg")];
@@ -608,7 +650,7 @@ async function makePdf(){
    if(i>0)pdf.addPage();
    pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",(PW-w)/2,0,w,h);
   }
-  const name=`每日讀報_${A.date}_${({zh:"中文國小版",zhj:"中文國中版",en:"英文版"})[lang]}.pdf`;
+  const name=`每日讀報_${A.date}_${({zh:"中文國小版",zhj:"中文國中版",en:"英文版"})[lang]}${bpmf&&lang!=="en"?"_注音":""}.pdf`;
   const cl=window.claude&&window.claude.use?await window.claude.use("downloads"):null;
   if(cl){await cl.save({filename:name,data:pdf.output("blob")});msg.textContent="PDF 已準備好。"}
   else{pdf.save(name);msg.textContent="PDF 已下載。"}
@@ -622,7 +664,8 @@ $("bZh").addEventListener("click",()=>setLang("zh"));
 $("bZj").addEventListener("click",()=>setLang("zhj"));
 $("bEn").addEventListener("click",()=>setLang("en"));
 $("pdfBtn").addEventListener("click",makePdf);
-if(window.self===window.top){$("printBtn").hidden=false;$("printBtn").addEventListener("click",()=>window.print())}
+$("bpmfBtn").addEventListener("click",()=>{bpmf=!bpmf;try{localStorage.setItem("dr-bpmf",bpmf?"1":"0")}catch(e){}render()});
+if(window.self===window.top){$("printBtn").hidden=false;$("printBtn").addEventListener("click",async()=>{buildPrint();await document.fonts.ready;paginate();window.print()})}
 
 document.addEventListener("click",e=>{
  const b=e.target.closest(".opts button");
