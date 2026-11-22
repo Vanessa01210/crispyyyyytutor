@@ -113,15 +113,16 @@ th{font-weight:400;font-size:14px;color:var(--soft);border-bottom:1.5px solid va
 .empty{color:var(--soft);font-size:16px}
 footer{padding:20px 0 40px;font-size:14px;color:var(--soft)}
 footer a{word-break:break-all}
-/* zhuyin mode */
+/* zhuyin mode: 曉聲通注音秋茄 (OFL) subset; Bpmf Iansui only as a fallback */
+@font-face{font-family:"SusuZhuyin";src:url("zhuyin.woff") format("woff");font-display:swap}
 #bpmfBtn[aria-pressed=true]{background:var(--pen);border-color:var(--pen);color:#fff}
-body.bpmf:not([data-lang=en]) :is(#title,#deck,#body,#caption,#teacherNote,#wordList,#extra,#quiz){font-family:"Bpmf Iansui","Iansui",sans-serif}
+body.bpmf:not([data-lang=en]) :is(#title,#deck,#body,#caption,#teacherNote,#wordList,#extra,#quiz){font-family:"SusuZhuyin","Bpmf Iansui","Iansui",sans-serif}
 body.bpmf:not([data-lang=en]) #title{font-weight:400;line-height:1.35}
 body.bpmf:not([data-lang=en]) #body{columns:1;font-size:20px;line-height:2.2}
 body.bpmf:not([data-lang=en]) #body p{text-align:left}
 body.bpmf:not([data-lang=en]) :is(.entry p,.idiom dl,.q){line-height:2}
 body.bpmf:not([data-lang=en]) :is(.idiom h3,.entry b,.sec,.sect>h2){font-weight:400}
-#print.bpmf :is(.hl,.dk,.cols2,.cap,.sticky,.think,.vc,.ic,.qq,.qs,.op){font-family:"Bpmf Iansui","Iansui",sans-serif}
+#print.bpmf :is(.hl,.dk,.cols2,.cap,.sticky,.think,.vc,.ic,.qq,.qs,.op){font-family:"SusuZhuyin","Bpmf Iansui","Iansui",sans-serif}
 #print.bpmf :is(.hl,.ic h3,.vc b,.qs){font-weight:400}
 #print.bpmf .cols2{columns:1;font-size:15.5px;line-height:2.05}
 #print.bpmf .cols2 p{text-align:left}
@@ -326,80 +327,80 @@ const ARTICLES=[{
   caption:"插圖：紫色燈光下的高雄港邊。BTS 來台期間，85 大樓、愛河等地都亮起紫色。",
   note:"讀完後，試著用三句話把這則新聞說給家人聽。畫線的詞語，看看能不能自己造句！",
   body:[
-   "韓國人氣男團 BTS（防彈少年團）在 11 月 19、21、22 日，到高雄世運主場館舉辦三場演唱會。這是他們{相隔} 8 年再次來台灣表演，也是這次亞洲{巡迴}的第一站。為了歡迎他們，高雄的 85 大樓、愛河等地都亮起了 BTS 的代表色——紫色，有些路口的行人號誌甚至顯示「ARMY Go」，ARMY 就是 BTS 粉絲的名稱。",
-   "11 月 20 日是演唱會中間的休息日。成員柾國、Jimin 和 j-hope 趁著{空檔}走進高雄的大街小巷。他們去了駁二藝術特區，搭過輕軌，也到旗津的海邊吹風，還在一家開了七十多年的老店吃早餐、喝紅茶牛奶。",
-   "柾國一邊逛，一邊用手機和相機記錄看到的風景。當天晚上他親自{剪輯}，在 21 日凌晨把一支約 2 分鐘的影片上傳到 Instagram，標題是「在高雄的空閒時間」。影片用溫暖的{復古}色調，拍下腳踏車、機車、中文招牌和老街巷。背景音樂也很用心，選的是台灣吉他{演奏家}董運昌的作品〈碧海藍天〉。",
+   "韓國人氣男團 BTS（防彈少^1年團）在 11 月 19、21、22 日，到高雄世運主場館舉辦三場演唱會。這是他們{相^1隔} 8 年再次來台灣表演，也是這次亞洲{巡迴}的第一站。為^1了歡迎他們，高雄的 85 大樓、愛河等地都亮起了 BTS 的代表色——紫色，有些路口的行人號誌甚至顯示「ARMY Go」，ARMY 就是 BTS 粉絲的名稱。",
+   "11 月 20 日是演唱會中間的休息日。成員柾國、Jimin 和 j-hope 趁著{空^1檔}走進高雄的大街小巷。他們去了駁二藝術特區，搭過輕軌，也到旗津的海邊吹風，還在一家開了七十多年的老店吃早餐、喝紅茶牛奶。",
+   "柾國一邊逛，一邊用手機和相機記錄看到的風景。當天晚上他親自{剪輯}，在 21 日凌晨把一支約 2 分鐘的影片上傳到 Instagram，標題是「在高雄的空^1閒時間」。影片用溫暖的{復古}色調^1，拍下腳踏車、機車、中文招牌和老街巷。背景音樂^1也很用心，選的是台灣吉他{演奏家}董運昌的作品〈碧海藍天〉。",
    "影片裡還有一個讓人感動的畫面：許多粉絲雖然很想靠近偶像，卻自動站在一條看不見的線外，安靜又有{秩序}地等候。不少外國網友看了，都稱讚台灣粉絲很有禮貌。",
-   "這支影片上傳大約 10 小時，就有超過 300 萬人按讚，觀看次數超過 2000 萬。高雄市長也用韓文留言道謝。許多網友開玩笑說，這是高雄「最貴」的城市{宣傳}片。",
-   "一支用心拍的小影片，讓世界各地的人重新認識了高雄。原來，我們每天走過的街道，在別人眼中也可以這麼美。"],
+   "這支影片上傳大約 10 小時，就有超過 300 萬人按讚，觀看次數超過 2000 萬。高雄市長^1也用韓文留言道謝。許多網友開玩笑說，這是高雄「最貴」的城市{宣傳}片。",
+   "一支用心拍的小影片，讓世界各地的人重^1新認識了高雄。原來，我們每天走過的街道，在別人眼中也可以這麼美。"],
   words:[
    ["巡迴","ㄒㄩㄣˊ ㄏㄨㄟˊ","到各地輪流表演或活動","劇團這個月在全台巡迴演出。"],
-   ["相隔","ㄒㄧㄤ ㄍㄜˊ","中間隔了（一段時間或距離）","兩個好朋友相隔三年才再見面。"],
-   ["空檔","ㄎㄨㄥˋ ㄉㄤˇ","忙碌中間空下來的時間","考試的空檔，我去圖書館借書。"],
-   ["剪輯","ㄐㄧㄢˇ ㄐㄧˊ","把影片或文章挑選、安排成完整作品","哥哥花了一整晚剪輯旅行影片。"],
-   ["復古","ㄈㄨˋ ㄍㄨˇ","模仿過去年代的風格","奶奶家的老時鐘很有復古風。"],
-   ["演奏家","ㄧㄢˇ ㄗㄡˋ ㄐㄧㄚ","專門彈奏樂器的人","這位鋼琴演奏家從五歲就開始練琴。"],
-   ["秩序","ㄓˋ ㄒㄩˋ","有條理、不混亂的樣子","大家排隊很有秩序，一下就進場了。"],
+   ["相^1隔","ㄒㄧㄤ ㄍㄜˊ","中間隔了（一段時間或距離）","兩個好朋友相^1隔三年才再見面。"],
+   ["空^1檔","ㄎㄨㄥˋ ㄉㄤˇ","忙碌中間空^1下來的時間","考試的空^1檔，我去圖書館借書。"],
+   ["剪輯","ㄐㄧㄢˇ ㄐㄧˊ","把影片或文章挑選、安排成完整作品","哥哥^1花了一整晚剪輯旅行影片。"],
+   ["復古","ㄈㄨˋ ㄍㄨˇ","模仿過去年代的風格","奶奶^1家的老時鐘很有復古風。"],
+   ["演奏家","ㄧㄢˇ ㄗㄡˋ ㄐㄧㄚ","專門彈^1奏樂^1器的人","這位鋼琴演奏家從五歲就開始練琴。"],
+   ["秩序","ㄓˋ ㄒㄩˋ","有條理、不混亂的樣子^1","大家排隊很有秩序，一下就進場了。"],
    ["宣傳","ㄒㄩㄢ ㄔㄨㄢˊ","讓更多人知道、認識某件事","學校製作海報宣傳運動會。"]],
   idioms:[
-   ["井然有序","整齊有條理，一點也不亂","粉絲安靜地站在線外等候","圖書館的書按照編號排得井然有序。"],
-   ["別出心裁","想法獨特，跟別人不一樣","柾國用台灣音樂當影片配樂","她的科展作品設計得別出心裁，得了第一名。"],
+   ["井然有序","整齊有條理，一點也不亂","粉絲安靜地^1站在線外等候","圖書館的書按照編號排得^1井然有序。"],
+   ["別出心裁","想法獨特，跟別人不一樣","柾國用台灣音樂^1當^1影片配樂^1","她的科展作品設計得^1別出心裁，得了第一名。"],
    ["賓至如歸","客人來了就像回到自己家一樣舒服","高雄用紫色燈光歡迎 BTS","民宿主人很親切，讓我們感到賓至如歸。"]],
   quiz:[
    {k:"sec",t:"一、閱讀理解"},
    {k:"mc",t:"BTS 這次在高雄舉辦幾場演唱會？",o:["一場","兩場","三場","八場"],a:2,why:"11 月 19、21、22 日，共三場。"},
-   {k:"mc",t:"柾國的影片是在什麼時候拍的？",o:["演唱會表演時","演唱會的休息日","搭飛機時","回韓國以後"],a:1,why:"11 月 20 日是休息日。"},
-   {k:"mc",t:"影片的背景音樂有什麼特別的地方？",o:["是 BTS 的新歌","是韓國民謠","是台灣音樂家的作品","是粉絲唱的歌"],a:2,why:"選用台灣吉他演奏家董運昌的〈碧海藍天〉。"},
-   {k:"mc",t:"為什麼外國網友稱讚台灣粉絲？",o:["喜歡尖叫","安靜有秩序地等候","送很多禮物","都會說韓文"],a:1,why:"粉絲自動站在線外，安靜等候。"},
-   {k:"sec",t:"二、詞語填空"},
-   {k:"sel",t:"下課的＿＿＿，我趕快去裝水。",o:["空檔","復古","巡迴"],a:0},
-   {k:"sel",t:"這支影片經過用心＿＿＿，變得更好看了。",o:["秩序","剪輯","相隔"],a:1},
+   {k:"mc",t:"柾國的影片是在什^2麼時候拍的？",o:["演唱會表演時","演唱會的休息日","搭飛機時","回韓國以後"],a:1,why:"11 月 20 日是休息日。"},
+   {k:"mc",t:"影片的背景音樂^1有什^2麼特別的地方？",o:["是 BTS 的新歌","是韓國民謠","是台灣音樂^1家的作品","是粉絲唱的歌"],a:2,why:"選用台灣吉他演奏家董運昌的〈碧海藍天〉。"},
+   {k:"mc",t:"為^1什^2麼外國網友稱讚台灣粉絲？",o:["喜歡尖叫","安靜有秩序地^1等候","送很多禮物","都會說韓文"],a:1,why:"粉絲自動站在線外，安靜等候。"},
+   {k:"sec",t:"二、詞語填空^1"},
+   {k:"sel",t:"下課的＿＿＿，我趕快去裝水。",o:["空^1檔","復古","巡迴"],a:0},
+   {k:"sel",t:"這支影片經過用心＿＿＿，變得^1更好看了。",o:["秩序","剪輯","相^1隔"],a:1},
    {k:"sel",t:"社團同學在校門口發傳單，＿＿＿快要到來的校慶。",o:["宣傳","演奏家","復古"],a:0},
    {k:"sec",t:"三、成語選填"},
    {k:"sel",t:"飯店的服務人員熱情又貼心，讓旅客＿＿＿。",o:["井然有序","別出心裁","賓至如歸"],a:2},
    {k:"sel",t:"這張生日卡片用樹葉做裝飾，真是＿＿＿。",o:["井然有序","別出心裁","賓至如歸"],a:1},
    {k:"sec",t:"四、想一想"},
-   {k:"open",t:"如果你要拍一支影片，向外國朋友介紹你住的地方，你會拍哪三個畫面？為什麼？"}]},
+   {k:"open",t:"如果你要拍一支影片，向外國朋友介紹你住的地方，你會拍哪三個畫面？為^1什^2麼？"}]},
  zhj:{level:"國中",edition:"中文・國中版",len:"約 750 字・閱讀約 6 分鐘",kicker:"文化・城市｜高雄",title:"一支 Vlog 的城市魅力：柾國鏡頭下的高雄",
   deck:"韓團 BTS 睽違八年來台開唱，成員柾國利用休息日拍下的高雄影片，意外成為全球矚目的城市宣傳。",
   caption:"插圖：紫色燈光下的高雄港邊。演唱會前，85 大樓、愛河、大港橋等地標陸續點亮紫色。",
-  note:"讀完後想一想：作者為什麼說「真誠的分享」也有影響力？試著找出文章裡支持這個說法的證據。",
+  note:"讀完後想一想：作者為^1什^2麼說「真誠的分享」也有影響力？試著找出文章裡支持這個說法的證據。",
   body:[
-   "11 月 19 日起，韓國男團 BTS 在高雄世運主場館一連舉辦三場《ARIRANG》世界巡迴演唱會。這不只是他們{睽違}八年再度來台，高雄更是這次亞洲巡演的首站。演唱會前，85 大樓、愛河、大港橋等地標陸續點亮紫色燈光，部分行人號誌也換上「ARMY Stop」「ARMY Go」的字樣，整座城市以實際行動，向這群遠道而來的歌手表達歡迎。",
-   "兩場演唱會之間的 20 日是休息日，柾國、Jimin 和 j-hope 走出飯店，在港都街頭{漫遊}。他們走訪駁二藝術特區、搭乘輕軌、到旗津海岸看海，也坐進一家經營超過七十年的老店，點了蛋餅和紅茶牛奶，像一般旅客一樣體驗在地生活。",
-   "當天深夜，柾國把自己用手機和相機拍下的片段，剪輯成一支兩分多鐘的 Vlog，在 21 日凌晨發布於 Instagram，命名為「在高雄的空閒時間」。影片以暖黃的復古色調，呈現腳踏車、機車、壁掛電風扇與中文招牌，畫面平凡，卻充滿台灣的{感性}。最令人驚喜的是配樂：他選用台灣吉他演奏家董運昌 2002 年的作品〈碧海藍天〉，讓影像與音樂相互呼應，處處可見{細膩}的巧思。",
-   "影片中還有一幕引起廣泛討論：大批粉絲雖然聚集在路旁，卻{自發}地站在一條看不見的界線外，安靜而有秩序地等候。不少海外網友留言稱讚，認為這展現了台灣粉絲的素養。",
-   "這支影片發布約十小時，按讚數便突破三百萬，觀看次數超過兩千萬，迅速成為國際{矚目}的焦點。高雄市長以韓文留言致謝；網友則笑稱，這是高雄「成本最高的城市宣傳片」，因為拍攝者是國際巨星。影片曝光後，許多粉絲依照畫面中的店家與景點前往{朝聖}，讓這些地方的人潮明顯增加。",
-   "一般的觀光{行銷}往往需要大筆預算，這支影片卻證明，真誠的觀察與分享，同樣具有強大的影響力。當我們用旅人的眼光重新看待身邊的街道，或許也會發現：那些習以為常的日常風景，正是一座城市最動人的地方。"],
+   "11 月 19 日起，韓國男團 BTS 在高雄世運主場館一連舉辦三場《ARIRANG》世界巡迴演唱會。這不只是他們{睽違}八年再度來台，高雄更是這次亞洲巡演的首站。演唱會前，85 大樓、愛河、大港橋等地標陸續點亮紫色燈光，部分^1行人號誌也換上「ARMY Stop」「ARMY Go」的字樣，整座城市以實際行動，向這群遠道而來的歌手表達歡迎。",
+   "兩場演唱會之間的 20 日是休息日，柾國、Jimin 和 j-hope 走出飯店，在港都^1街頭{漫遊}。他們走訪駁二藝術特區、搭乘輕軌、到旗津海岸看海，也坐進一家經營超過七十年的老店，點了蛋餅和紅茶牛奶，像一般旅客一樣體驗在地生活。",
+   "當天深夜，柾國把自己用手機和相機拍下的片段，剪輯成一支兩分多鐘的 Vlog，在 21 日凌晨發布於 Instagram，命名為「在高雄的空^1閒時間」。影片以暖黃的復古色調^1，呈現腳踏車、機車、壁掛電風扇與中文招牌，畫面平凡，卻充滿台灣的{感性}。最令人驚喜的是配樂^1：他選用台灣吉他演奏家董運昌 2002 年的作品〈碧海藍天〉，讓影像與音樂^1相^1互呼應^1，處^1處^1可見{細膩}的巧思。",
+   "影片中還有一幕引起廣泛討論：大批粉絲雖然聚集在路旁，卻{自發}地站在一條看不見的界線外，安靜而有秩序地^1等候。不少海外網友留言稱讚，認為這展現了台灣粉絲的素養。",
+   "這支影片發布約十小時，按讚數便突破三百萬，觀看次數超過兩千萬，迅速成為國際{矚目}的焦點。高雄市長^1以韓文留言致謝；網友則笑稱，這是高雄「成本最高的城市宣傳片」，因為^1拍攝者是國際巨星。影片曝光後，許多粉絲依照畫面中的店家與景點前往{朝聖}，讓這些地方的人潮明顯增加。",
+   "一般的觀光{行銷}往往需要大筆預算，這支影片卻證明，真誠的觀察與分享，同樣具有強大的影響力。當我們用旅人的眼光重^1新看待身邊的街道，或許也會發現：那些習以為常的日常風景，正是一座城市最動人的地方。"],
   words:[
-   ["睽違","ㄎㄨㄟˊ ㄨㄟˊ","分離、相隔（多指時間很久）","睽違十年，他終於回到故鄉。"],
-   ["漫遊","ㄇㄢˋ ㄧㄡˊ","沒有固定目的，隨意地遊覽","週末我們在老街漫遊了一整個下午。"],
-   ["感性","ㄍㄢˇ ㄒㄧㄥˋ","帶有情感、讓人有感觸的特質","這部電影充滿感性，看得我眼眶泛紅。"],
-   ["細膩","ㄒㄧˋ ㄋㄧˋ","細緻周到，連小地方都注意到","她的文筆細膩，描寫得非常生動。"],
-   ["自發","ㄗˋ ㄈㄚ","出於自己的意願，不是被要求","同學們自發地留下來整理教室。"],
+   ["睽違","ㄎㄨㄟˊ ㄨㄟˊ","分離、相^1隔（多指時間很久）","睽違十年，他終於回到故鄉。"],
+   ["漫遊","ㄇㄢˋ ㄧㄡˊ","沒有固定目的，隨意地^1遊覽","週末我們在老街漫遊了一整個下午。"],
+   ["感性","ㄍㄢˇ ㄒㄧㄥˋ","帶有情感、讓人有感觸的特質","這部電影充滿感性，看得^1我眼眶泛紅。"],
+   ["細膩","ㄒㄧˋ ㄋㄧˋ","細緻周到，連小地方都注意到","她的文筆細膩，描寫得^1非常生動。"],
+   ["自發","ㄗˋ ㄈㄚ","出於自己的意願，不是被要^1求","同學們自發地^1留下來整理教室。"],
    ["矚目","ㄓㄨˇ ㄇㄨˋ","注視、特別受到重視","這場決賽受到全國矚目。"],
-   ["朝聖","ㄔㄠˊ ㄕㄥˋ","原指到聖地參拜；現在也指到喜愛的人事物相關地點參訪","很多影迷到電影拍攝地朝聖。"],
+   ["朝聖","ㄔㄠˊ ㄕㄥˋ","原指到聖地參拜；現在也指到喜愛的人事物相^1關地點參訪","很多影迷到電影拍攝地朝聖。"],
    ["行銷","ㄒㄧㄥˊ ㄒㄧㄠ","推廣商品、服務或觀念，讓更多人接受","這家店很會用社群媒體行銷。"]],
   idioms:[
    ["按圖索驥","照著圖畫去找好馬；現多比喻按照線索去尋找","粉絲照著影片畫面去找店家","他拿著地圖按圖索驥，終於找到那家老書店。"],
-   ["相得益彰","兩者互相配合，使彼此的優點更加明顯","復古畫面配上台灣吉他音樂","這道菜的醬汁和食材相得益彰。"],
-   ["別出心裁","構想獨特，與眾不同","選用台灣音樂人的作品當配樂","這份報告的封面設計別出心裁。"],
+   ["相^1得益彰","兩者互相^1配合，使彼此的優點更加明顯","復古畫面配上台灣吉他音樂^1","這道菜的醬汁和食材相^1得益彰。"],
+   ["別出心裁","構想獨特，與眾不同","選用台灣音樂^1人的作品當^1配樂^1","這份報告的封面設計別出心裁。"],
    ["井然有序","整齊有條理，一點也不亂","粉絲自發站在線外安靜等候","災後的物資發放井然有序。"]],
   quiz:[
    {k:"sec",t:"一、閱讀理解"},
-   {k:"mc",t:"根據第一段，高雄在這次 BTS 巡演中有什麼特別意義？",o:["巡演的最後一站","BTS 第一次來台灣","亞洲巡演的首站","唯一的戶外場地"],a:2,why:"文中提到高雄是這次亞洲巡演的首站。"},
-   {k:"mc",t:"第三段說配樂「處處可見細膩的巧思」，作者想表達什麼？",o:["選用台灣音樂與畫面呼應，顯示拍攝者的用心","這首音樂的版權很昂貴","柾國自己彈奏了吉他","影片的音樂比畫面更重要"],a:0,why:"台灣音樂配上台灣街景，兩者呼應。"},
+   {k:"mc",t:"根據第一段，高雄在這次 BTS 巡演中有什^2麼特別意義？",o:["巡演的最後一站","BTS 第一次來台灣","亞洲巡演的首站","唯一的戶外場地"],a:2,why:"文中提到高雄是這次亞洲巡演的首站。"},
+   {k:"mc",t:"第三段說配樂^1「處^1處^1可見細膩的巧思」，作者想表達什^2麼？",o:["選用台灣音樂^1與畫面呼應^1，顯示拍攝者的用心","這首音樂^1的版權很昂貴","柾國自己彈^1奏了吉他","影片的音樂^1比畫面更重要"],a:0,why:"台灣音樂^1配上台灣街景，兩者呼應^1。"},
    {k:"mc",t:"網友說這是「成本最高的城市宣傳片」，這句話的語氣比較接近哪一種？",o:["批評浪費錢","擔心觀光客太多","抱怨影片太短","帶著幽默的讚美"],a:3,why:"用玩笑的方式稱讚影片的宣傳效果。"},
-   {k:"mc",t:"最後一段的主旨是什麼？",o:["觀光行銷一定要花大錢","真誠的觀察與分享也能產生影響力","只有明星才能宣傳城市","應該多拍影片賺取收入"],a:1},
+   {k:"mc",t:"最後一段的主旨是什^2麼？",o:["觀光行銷一定要花大錢","真誠的觀察與分享也能產生影響力","只有明星才能宣傳城市","應該多拍影片賺取收入"],a:1},
    {k:"sec",t:"二、詞語選填"},
-   {k:"sel",t:"兩位老同學＿＿＿二十年，終於在同學會上重逢。",o:["睽違","漫遊","矚目"],a:0},
+   {k:"sel",t:"兩位老同學＿＿＿二十年，終於在同學會上重^1逢。",o:["睽違","漫遊","矚目"],a:0},
    {k:"sel",t:"這場比賽備受＿＿＿，全國觀眾都在關注結果。",o:["細膩","矚目","自發"],a:1},
-   {k:"sel",t:"沒有人要求，同學們卻＿＿＿組成了打掃小隊。",o:["朝聖","行銷","自發"],a:2},
+   {k:"sel",t:"沒有人要^1求，同學們卻＿＿＿組成了打掃小隊。",o:["朝聖","行銷","自發"],a:2},
    {k:"sec",t:"三、成語選填"},
-   {k:"sel",t:"這幅畫的色彩與畫框搭配得＿＿＿，更顯得出色。",o:["按圖索驥","相得益彰","井然有序","別出心裁"],a:1},
-   {k:"sel",t:"他拿著網友整理的清單＿＿＿，一間一間找到影片裡的店。",o:["按圖索驥","相得益彰","井然有序","別出心裁"],a:0},
+   {k:"sel",t:"這幅畫的色彩與畫框搭配得^1＿＿＿，更顯得^1出色。",o:["按圖索驥","相^1得益彰","井然有序","別出心裁"],a:1},
+   {k:"sel",t:"他拿著網友整理的清單＿＿＿，一間一間找到影片裡的店。",o:["按圖索驥","相^1得益彰","井然有序","別出心裁"],a:0},
    {k:"sec",t:"四、想一想"},
-   {k:"open",t:"你認為一支個人拍攝的影片，為什麼有時比傳統廣告更能打動人？請寫出兩個理由，並從文章中找一個例子支持。"}]},
+   {k:"open",t:"你認為一支個人拍攝的影片，為^1什^2麼有時比傳統廣告更能打動人？請寫出兩個理由，並從文章中找一個例子^1支持。"}]},
  en:{level:"國小高年級～國中",edition:"English Edition",len:"About 220 words・CEFR A2",kicker:"Culture・Kaohsiung",title:"Jungkook's Video Shows Kaohsiung to the World",
   deck:"On his day off, BTS member Jungkook filmed Kaohsiung with his phone. Millions of people watched it in one day.",
   caption:"Illustration: Kaohsiung harbour in purple light. The city lit up its landmarks for BTS.",
@@ -454,6 +455,10 @@ let lang="zh";try{lang=localStorage.getItem("dr-lang")||"zh"}catch(e){}
 let bpmf=false;try{bpmf=localStorage.getItem("dr-bpmf")==="1"}catch(e){}
 if(!["zh","zhj","en"].includes(lang))lang="zh";
 const picks={};
+/* reading marks: "樂^1" = 1st alternate reading in the zhuyin font (selector U+E01E1). Shown only in 注音 mode. */
+const strip=s=>String(s).replace(/\^\d/g,"").replace(/[\u{E01E0}-\u{E01EF}]/gu,"");
+const zy=s=>s.replace(/\^(\d)/g,(m,n)=>bpmf&&lang!=="en"?String.fromCodePoint(0xE01E0+Number(n)):"");
+function view(o){if(typeof o==="string")return zy(o);if(Array.isArray(o))return o.map(view);if(o&&typeof o==="object"){const r={};for(const k in o)r[k]=view(o[k]);return r}return o}
 
 /* ---------- storage: local device, or Firebase when configured ---------- */
 const Store={
@@ -498,11 +503,11 @@ const Store={
 function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 
 /* ---------- render ---------- */
-function tip(w){const h=A[lang].words.find(x=>x[0]===w);return h?h[2]:""}
+function tip(w){const h=A[lang].words.find(x=>strip(x[0])===strip(w));return h?strip(h[2]):""}
 function bodyHtml(paras){return paras.map(p=>"<p>"+esc(p).replace(/\{([^}]+)\}/g,(m,w)=>{const t=tip(w);return t?`<mark title="${esc(t)}">${w}</mark>`:`<u>${w}</u>`})+"</p>").join("")}
 
 function render(){
- const L=A[lang],zh=lang!=="en";
+ const L=view(A[lang]),zh=lang!=="en";
  document.documentElement.lang=zh?"zh-Hant":"en";
  document.body.dataset.lang=lang;document.body.classList.toggle("bpmf",bpmf);
  $("bpmfBtn").hidden=!zh;$("bpmfBtn").setAttribute("aria-pressed",bpmf);
@@ -540,7 +545,7 @@ function render(){
   if(q.k==="open")b=`<textarea id="q${i}" aria-label="寫下你的想法" placeholder="${zh?"這題沒有標準答案，寫下你的想法":"Write your answer here"}"></textarea>`;
   return `<div class="q" id="box${i}"><p class="t">${i+1}. ${esc(q.t)}</p>${b}<div class="fb" id="fb${i}"></div></div>`;
  }).join("")+`<div class="actions"><button class="btn" type="submit">對答案</button><button class="btn ghost" type="button" id="reset">重新作答</button><span class="score" id="score" aria-live="polite"></span></div>`;
- $("pastList").innerHTML=ARTICLES.map(a=>`<a href="#story"><small>第 ${a.no} 期・${a.date.replace(/-/g,"/")}・${a.cat}</small><b>${esc(a.zh.title)}</b><small>${esc(a.en.title)}</small></a>`).join("");
+ $("pastList").innerHTML=ARTICLES.map(a=>`<a href="#story"><small>第 ${a.no} 期・${a.date.replace(/-/g,"/")}・${a.cat}</small><b>${esc(strip(a.zh.title))}</b><small>${esc(a.en.title)}</small></a>`).join("");
  $("src").innerHTML="本期文章依下列報導改寫，未照搬原文："+A.sources.map(s=>`<a href="${s[1]}">${esc(s[0])}</a>`).join("、");
  renderUser();buildPrint();
 }
@@ -563,7 +568,7 @@ async function renderScores(){
 
 /* ---------- printable sheet ---------- */
 function buildPrint(){
- const L=A[lang],zh=lang!=="en",pages=3;
+ const L=view(A[lang]),zh=lang!=="en",pages=3;
  const mast=`<div class="pm"><div class="no">第 ${A.no} 期</div><div><h1>酥酥老師每日讀報</h1></div><div class="ed">${dateZh(A.date)}<br>適讀：${L.level}</div></div>
   <div class="strip2"><span>給國小、國中生的時事報・每天一篇</span><span>${L.edition}</span></div>`;
  const foot=p=>`<div class="ft"><span>酥酥老師每日讀報｜IG、Threads @crispyyyyy0121</span><span>${p} / ${pages}</span></div>`;
@@ -674,7 +679,7 @@ document.addEventListener("click",e=>{
 });
 $("quiz").addEventListener("submit",async e=>{
  e.preventDefault();
- const qs=A[lang].quiz.filter(q=>q.k!=="sec");let right=0,total=0;
+ const qs=view(A[lang]).quiz.filter(q=>q.k!=="sec");let right=0,total=0;
  qs.forEach((q,i)=>{
   const box=$("box"+i),fb=$("fb"+i);box.classList.remove("ok","no");
   if(q.k==="open"){if($("q"+i).value.trim()){box.classList.add("ok");fb.textContent="寫得好！可以拿給老師看看。"}return}
@@ -688,7 +693,7 @@ $("quiz").addEventListener("submit",async e=>{
  });
  $("score").textContent=`${right} / ${total} 題答對`;
  if(Store.user){
-  try{await Store.save({article:A.id,title:A[lang].title,lang,right,total});$("score").textContent+="・已記錄";renderScores()}
+  try{await Store.save({article:A.id,title:strip(A[lang].title),lang,right,total});$("score").textContent+="・已記錄";renderScores()}
   catch(err){$("score").textContent+="・這次沒記錄到"}
  }else $("score").textContent+="・登入後可記錄成績";
 });
