@@ -210,7 +210,7 @@ body.bpmf:not([data-lang=en]) :is(.idiom h3,.entry b,.sec,.sect>h2){font-weight:
  </div>
  <div class="name"><h1>酥酥老師每日讀報</h1><p>給國小、國中生的時事報・每天一篇，讀懂世界、學好中英文</p></div>
  <div class="bar">
-  <nav aria-label="主選單"><a href="#story">今日頭條</a><a href="#words">生詞</a><a href="#practice">練習題</a><a href="#scores">我的成績</a><a href="#past">往期</a></nav>
+  <nav aria-label="主選單"><a href="#story" id="navStory">今日頭條</a><a href="#words">生詞</a><a href="#practice">練習題</a><a href="#scores">我的成績</a><a href="#past">往期</a></nav>
   <div class="tools">
    <div class="switch" role="group" aria-label="切換語言"><button id="bZh" type="button" aria-pressed="true">中文・國小</button><button id="bZj" type="button" aria-pressed="false">中文・國中</button><button id="bEn" type="button" aria-pressed="false">English</button></div>
    <button class="chip" id="bpmfBtn" type="button" aria-pressed="false" title="在國字旁邊加上注音">ㄅ 注音</button>
@@ -232,37 +232,7 @@ body.bpmf:not([data-lang=en]) :is(.idiom h3,.entry b,.sec,.sect>h2){font-weight:
  </div>
  <aside>
   <figure>
-   <div class="photo" aria-hidden="true">
-    <svg viewBox="0 0 400 300">
-     <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e2258"/><stop offset="1" stop-color="#a27ed6"/></linearGradient>
-     <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b8fd1"/><stop offset="1" stop-color="#244c86"/></linearGradient></defs>
-     <rect width="400" height="300" fill="url(#sky)"/>
-     <g fill="#fff" opacity=".8"><circle cx="40" cy="30" r="1.6"/><circle cx="120" cy="50" r="1.2"/><circle cx="300" cy="24" r="1.8"/><circle cx="360" cy="70" r="1.2"/><circle cx="220" cy="30" r="1.2"/></g>
-     <circle cx="330" cy="58" r="20" fill="#fff4d6"/>
-     <ellipse class="glow" cx="170" cy="120" rx="70" ry="90" fill="#d9b8ff" opacity=".5"/>
-     <path d="M150 210 L150 92 Q150 70 162 64 L162 42 L178 42 L178 64 Q190 70 190 92 L190 210 Z" fill="#5a3f9e" stroke="#1d1538" stroke-width="3" stroke-linejoin="round"/>
-     <path d="M162 100 L178 100 M162 125 L178 125 M162 150 L178 150 M162 175 L178 175" stroke="#e2c9ff" stroke-width="5" stroke-linecap="round"/>
-     <rect x="90" y="150" width="46" height="60" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
-     <rect x="202" y="140" width="40" height="70" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
-     <rect x="250" y="168" width="54" height="42" rx="4" fill="#7c63c4" stroke="#1d1538" stroke-width="3"/>
-     <g fill="#ffe9a8"><rect x="100" y="162" width="8" height="8" rx="2"/><rect x="118" y="178" width="8" height="8" rx="2"/><rect x="212" y="154" width="8" height="8" rx="2"/><rect x="224" y="178" width="8" height="8" rx="2"/><rect x="262" y="180" width="8" height="8" rx="2"/><rect x="282" y="180" width="8" height="8" rx="2"/></g>
-     <rect x="0" y="206" width="400" height="8" fill="#1d1538"/>
-     <rect x="20" y="182" width="120" height="26" rx="12" fill="#f4f1ea" stroke="#1d1538" stroke-width="3"/>
-     <rect x="20" y="194" width="120" height="5" fill="#7ac27f"/>
-     <g fill="#8fc3ef" stroke="#1d1538" stroke-width="2"><rect x="32" y="186" width="18" height="9" rx="2"/><rect x="58" y="186" width="18" height="9" rx="2"/><rect x="84" y="186" width="18" height="9" rx="2"/><rect x="110" y="186" width="18" height="9" rx="2"/></g>
-     <rect x="0" y="214" width="400" height="86" fill="url(#sea)"/>
-     <path d="M0 236 Q25 228 50 236 T100 236 T150 236 T200 236 T250 236 T300 236 T350 236 T400 236" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".7"/>
-     <path d="M0 262 Q25 254 50 262 T100 262 T150 262 T200 262 T250 262 T300 262 T350 262 T400 262" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".5"/>
-     <path d="M150 236 L190 236 L184 296 L156 296 Z" fill="#c7a6ff" opacity=".25"/>
-     <g transform="rotate(-8 330 220)">
-      <rect x="292" y="150" width="80" height="140" rx="14" fill="#1b1b1b" stroke="#fff" stroke-width="3"/>
-      <rect x="300" y="164" width="64" height="104" rx="6" fill="#f1ecfc"/>
-      <path d="M300 240 L320 214 L336 230 L350 210 L364 232 L364 268 L300 268 Z" fill="#a98ae6"/>
-      <circle cx="344" cy="186" r="9" fill="#fff4d6"/>
-      <circle cx="310" cy="174" r="4" fill="#c8102e"/>
-     </g>
-    </svg>
-   </div>
+   <div class="photo" id="photo" aria-hidden="true"></div>
    <figcaption id="caption"></figcaption>
   </figure>
   <div class="note hand"><b>酥酥老師的話</b><span id="teacherNote"></span></div>
@@ -320,7 +290,136 @@ body.bpmf:not([data-lang=en]) :is(.idiom h3,.entry b,.sec,.sect>h2){font-weight:
 /* 放上 GitHub Pages 後，把 Firebase 設定貼在這裡，就會改用雲端登入與成績紀錄。留空 = 成績只存在這台裝置。 */
 const FIREBASE_CONFIG=null;
 
-const ARTICLES=[{
+const ARTICLES=[
+{
+ id:"2026-11-23-siwon-kaohsiung-food",no:2,date:"2026-11-23",cat:"生活・美食",level:"國小高年級～國中",
+ zh:{level:"國小高年級",edition:"中文・國小版",len:"約 500 字・閱讀約 4 分鐘",kicker:"生活・美食｜高雄",title:"大明星的新任務：吃遍台灣小吃！",
+  deck:"Super Junior 的始源在高雄拍電影，空^1閒時間就變身美食探險家，第一站是一家四十多年的牛肉麵老店。",
+  caption:"插圖：熱騰騰的牛肉麵和皮蛋豆腐，旁邊是一支準備拍照記錄的手機。",
+  note:"讀完後想一想：如果始源來你住的地方，你會推薦他吃什^2麼？為^1什^2麼？畫線的詞語，試著自己造句！",
+  body:[
+   "如果你正在牛肉麵店吃晚餐，一抬頭，發現隔壁桌坐著韓國大明星，你會有什^2麼反應^1？11 月 12 日晚上，這件事真的在高雄發生了！",
+   "這位明星是 Super Junior 的始源。他最近在高雄拍電影，會在這裡{停留}一段時間。不用工作的時候，他最愛做的事只有一件——找好吃的！這一次，他沒有告訴任何人，悄悄走進苓雅區一家開了四十多年的牛肉麵店。",
+   "大塊牛肉的湯麵、鋪滿青菜的乾拌麵、炒空心菜，再來一盤皮蛋豆腐——始源一口接一口，吃得^1津津有味。吃飽後，他用中文在網路上寫下「在台灣的新發現」，開心地^1說這次的{探索}成功了！",
+   "更^1讓粉絲尖叫的是，他還{宣布}了一個新任務：要和工作人員四處^1{打聽}，把台灣各地藏在巷子^1裡的隱藏版美食一家一家吃過，而這碗牛肉麵，就是任務的第一站。",
+   "消息一傳開，連高雄市長^1都跑來留言，誇他很懂吃，還{推薦}他下次加點酸菜辣椒。後來，始源又跑到台南，{品嘗}一家開了六十五年的沙茶火鍋老店。有些高雄人看了又驕傲又緊張，開玩笑說自己的私房愛店一家一家被找到，以後恐怕要排隊排到腿痠啦！",
+   "一碗{道地}的牛肉麵，讓世界各地的粉絲都「聞」到了台灣小吃的香味。其實，每個人的{家鄉}都藏著這樣的美味寶藏^1。換你當小導遊——你會帶始源去吃哪一家呢？"],
+  words:[
+   ["停留","ㄊㄧㄥˊ ㄌㄧㄡˊ","暫時待在某個地方","颱風過後，我們在外婆家多停留了一天。"],
+   ["探索","ㄊㄢˋ ㄙㄨㄛˇ","到不熟悉的地方去尋找、發現","小隊員們在森林裡探索昆蟲的家。"],
+   ["宣布","ㄒㄩㄢ ㄅㄨˋ","公開告訴大家","老師宣布下週要去校外教學。"],
+   ["打聽","ㄉㄚˇ ㄊㄧㄥ","向別人詢問消息","我向鄰居打聽附近哪裡有書店。"],
+   ["推薦","ㄊㄨㄟ ㄐㄧㄢˋ","把好的人或東西介紹給別人","姊姊^1推薦我讀這本冒險小說。"],
+   ["品嘗","ㄆㄧㄣˇ ㄔㄤˊ","仔細地^1吃，感受食物的味道","爺爺^1慢慢品嘗剛泡好的熱茶。"],
+   ["道地","ㄉㄠˋ ㄉㄧˋ","真正是當地的做法或口味","這家店賣的是道地的台南碗粿。"],
+   ["家鄉","ㄐㄧㄚ ㄒㄧㄤ","自己出生、長^1大的地方","爸爸^1的家鄉在花蓮，那裡有很美的海。"]],
+  idioms:[
+   ["津津有味","吃得^1很香、很有味道；也形容很有興^1趣","始源吃牛肉麵和皮蛋豆腐","弟弟^1把媽媽^1做的炒飯吃得^1津津有味。"],
+   ["名不虛傳","名聲和實際情形一樣好，不是隨便說說的","開了四十多年的老店，連市長^1都稱讚","這座夜市果然名不虛傳，每一攤都好好吃。"],
+   ["不期而遇","沒有事先約好，卻意外遇見","隔壁桌突然坐著大明星","放學時，我和老朋友在公園不期而遇。"]],
+  quiz:[
+   {k:"sec",t:"一、閱讀理解"},
+   {k:"mc",t:"始源最近為^1什^2麼會在高雄？",o:["來開演唱會","來拍電影","來讀書","來找朋友"],a:1},
+   {k:"mc",t:"始源在牛肉麵店「沒有」點哪一樣？",o:["牛肉麵","皮蛋豆腐","炒空心菜","珍珠奶茶"],a:3},
+   {k:"mc",t:"始源宣布的新計畫是什^2麼？",o:["開一家牛肉麵店","吃遍台灣的隱藏版美食","學做皮蛋豆腐","拍一部美食電影"],a:1},
+   {k:"mc",t:"高雄市長^1推薦始源下次加什^2麼？",o:["酸菜辣椒","冰淇淋","蛋黃","沙茶醬"],a:0},
+   {k:"sec",t:"二、詞語填空^1"},
+   {k:"sel",t:"我向同學＿＿＿，才知道新開的文具店在哪裡。",o:["打聽","品嘗","停留"],a:0},
+   {k:"sel",t:"這家餐廳的滷肉飯很好吃，我想＿＿＿給你。",o:["宣布","推薦","探索"],a:1},
+   {k:"sel",t:"校長^1在朝^1會上＿＿＿：下週要舉辦運動會。",o:["宣布","家鄉","道地"],a:0},
+   {k:"sec",t:"三、成語選填"},
+   {k:"sel",t:"小狗把飼料吃得^1＿＿＿，一下子^1就吃光了。",o:["津津有味","名不虛傳","不期而遇"],a:0},
+   {k:"sel",t:"大家都說這座山的風景很美，親眼看到後果然＿＿＿。",o:["津津有味","名不虛傳","不期而遇"],a:1},
+   {k:"sec",t:"四、想一想"},
+   {k:"open",t:"如果有外國朋友來你的家鄉，你會推薦他吃哪一道美食？請說說它的特色。"}]},
+ zhj:{level:"國中",edition:"中文・國中版",len:"約 800 字・閱讀約 6 分鐘",kicker:"生活・美食｜高雄",title:"從一碗牛肉麵出發：始源的「台灣新發現」",
+  deck:"在高雄拍片的韓星始源，走進經營四十多年的牛肉麵店，宣布要尋訪全台隱藏美食；一則貼文，意外讓在地小吃成為焦點。",
+  caption:"插圖：一碗牛肉麵、一盤皮蛋豆腐，和一支準備記錄美食的手機。",
+  note:"讀完後想一想：高雄網友一邊開心、一邊擔心，他們在擔心什^2麼？你認為名人推薦對小店是好事還是壞事？",
+  body:[
+   "大明星來台灣，多半是為^1了開演唱會；但最近 Super Junior 成員始源最受關注的，卻是他的「吃」。今年{頻繁}來台的他，這次是因為^1拍攝電影而在高雄停留；不過工作之餘，他的腳步總會不知不覺走向台灣的街頭小吃。",
+   "11 月 12 日晚間，沒有預告、沒有排場，始源走進高雄苓雅區一間經營超過四十年的牛肉麵店。肉塊厚實的湯麵、鋪滿青菜的乾拌麵、一盤炒空心菜，再配上皮蛋豆腐——標準的台式晚餐。飯後，他在社群平台用中文寫下「在台灣的新發現」，宣告第一次探索圓滿成功。",
+   "這篇貼文，其實更^1像一封「挑戰書」：始源宣布，將和工作人員四處^1打聽，親自{尋訪}台灣各地的隱藏小店。連高雄市長^1都忍不住在底下留言，稱讚他「懂吃」，還附上私房吃法——加點酸菜辣椒，味道會更^1有{層次}。",
+   "接下來，他的美食地圖一路延伸：台南一家六十五年的{老字號}沙茶火鍋、高雄巷弄^1裡的蒸餃店……每當足跡{曝光}，粉絲便循線而來，店門口很快湧現人潮。",
+   "對此，高雄網友的心情可說是又喜又憂。有人在社群上半開玩笑地^1抱怨，私藏多年的愛店接連被「發掘」，以後恐怕得^2排很久的隊；也有人樂觀地^1認為，國際明星的推薦能{帶動}在地商家的生意，讓台灣小吃被更^1多人看見。",
+   "不過，明星的光環來得^1快，也去得^1快。真正讓這些{道地}老店{屹立}數十年的，從來不是名人，而是店家日復一日對味道的堅持，以及街坊鄰居一碗接一碗的支持。下次經過巷口的小店，不妨也當一回美食偵探吧！"],
+  words:[
+   ["頻繁","ㄆㄧㄣˊ ㄈㄢˊ","次數很多，接連不斷","最近地震頻繁，大家要多注意安全。"],
+   ["尋訪","ㄒㄩㄣˊ ㄈㄤˇ","到各處^1去尋找、拜訪","作家走遍鄉間，尋訪老一輩的故事。"],
+   ["層次","ㄘㄥˊ ㄘˋ","內容的深淺與變化","這道湯加了香料，味道更^1有層次。"],
+   ["老字號","ㄌㄠˇ ㄗˋ ㄏㄠˋ","開了很久、很有名氣的商店","這家餅店是當地的老字號，已經傳了三代。"],
+   ["曝光","ㄆㄨˋ ㄍㄨㄤ","原指底片照到光；比喻隱密的事被公開","新手機的設計圖提早曝光了。"],
+   ["帶動","ㄉㄞˋ ㄉㄨㄥˋ","引導、促使跟著發展","新捷運站帶動了附近的商圈。"],
+   ["道地","ㄉㄠˋ ㄉㄧˋ","真正是當地的、正宗的","這碗擔^1仔^1麵是道地的台南口味。"],
+   ["屹立","ㄧˋ ㄌㄧˋ","像山一樣穩固地^1站立；比喻長久不倒","這座古廟在風雨中屹立了兩百年。"]],
+  idioms:[
+   ["畫龍點睛","比喻在關鍵的地方加上一筆，使整體更^1生動","市長^1建議加酸菜辣椒提味","結尾這句話畫龍點睛，讓整篇作文更^1有力量。"],
+   ["大排長龍","形容排隊的人很多，像一條長龍","網友擔心愛店以後要排很久的隊","新開的冰店天天大排長龍。"],
+   ["慕名而來","因為^1仰慕名聲而前來","粉絲循著始源的足跡到店用餐","許多遊客慕名而來，只為^1看一眼這片花海。"],
+   ["名不虛傳","名聲與實際相^1符","經營四十多年的老店，連市長^1都推薦","這間博物館果然名不虛傳，展品非常精彩。"]],
+  quiz:[
+   {k:"sec",t:"一、閱讀理解"},
+   {k:"mc",t:"根據第一段，始源近期待^1在高雄的主要原因是什^2麼？",o:["舉辦演唱會","拍攝電影","擔任觀光大使","參加美食比賽"],a:1},
+   {k:"mc",t:"始源的「台灣新發現」計畫指的是什^2麼？",o:["在台灣開餐廳","尋訪台灣各地隱藏的美食小店","推出新的便利商店商品","學習台灣料理"],a:1},
+   {k:"mc",t:"第五段說高雄網友「又喜又憂」，原因是什^2麼？",o:["既高興^1小店被看見，又擔心以後要排很久的隊","不喜歡外國明星","擔心食物變難吃","店家要漲價"],a:0},
+   {k:"mc",t:"最後一段，作者認為讓老店長久經營的關鍵是什^2麼？",o:["名人的推薦","網路廣告","店家對味道的堅持與鄰居的支持","便^1宜的價格"],a:2},
+   {k:"sec",t:"二、詞語選填"},
+   {k:"sel",t:"這部電影的劇照提前＿＿＿，引起影迷熱烈討論。",o:["曝光","屹立","頻繁"],a:0},
+   {k:"sel",t:"觀光活動＿＿＿了小鎮的經濟發展。",o:["尋訪","帶動","層次"],a:1},
+   {k:"sel",t:"這家開了八十年的＿＿＿麵店，至今仍堅持手工製麵。",o:["老字號","道地","頻繁"],a:0},
+   {k:"sec",t:"三、成語選填"},
+   {k:"sel",t:"每到假日，這家排骨飯店門口總是＿＿＿。",o:["畫龍點睛","大排長龍","慕名而來","名不虛傳"],a:1},
+   {k:"sel",t:"畫面角落加上一隻飛鳥，有＿＿＿的效果。",o:["畫龍點睛","大排長龍","慕名而來","名不虛傳"],a:0},
+   {k:"sec",t:"四、想一想"},
+   {k:"open",t:"名人到小店用餐後，店家常會湧入大量人潮。你認為這對店家、老顧客和附近居民，各有什^2麼影響？請至少寫出兩個面向。"}]},
+ en:{level:"國小高年級～國中",edition:"English Edition",len:"About 200 words・CEFR A2",kicker:"Food・Kaohsiung",title:"Siwon's Taiwan Food Adventure",
+  deck:"Super Junior's Siwon is making a movie in Kaohsiung. His next big job? Finding hidden food all over Taiwan!",
+  caption:"Illustration: Beef noodles, tofu with century eggs, and a phone ready to take photos.",
+  note:"螢光筆畫的是生詞，畫底線的是 be going to（打算、將要）。讀完後，用 be going to 說說你週末要做什麼！",
+  body:[
+   "What do you do when you visit a new city? Siwon from the K-pop group Super Junior eats! He is {stay}ing in Kaohsiung to make a {movie}. In his free time, he looks for good food.",
+   "On November 12, he walked into a beef noodle shop. The shop is more than 40 years old. Beef noodles, vegetables, tofu with century eggs... yum! Siwon said the food was really {delicious}.",
+   "Then he shared a big plan in Chinese. He {is going to} {explore} Taiwan with his team. They {are going to} ask {local} people about {hidden} food places. The beef noodle shop was stop number one!",
+   "Even the mayor of Kaohsiung wrote a comment. He said Siwon really knows good food. He also {suggest}ed adding pickled vegetables and chili next time.",
+   "Some people in Kaohsiung are laughing and worrying at the same time. Their {secret} food places are not secret anymore! Soon, more fans {are going to} {line up} at these shops. Where {are} you {going to} take Siwon next?"],
+  words:[
+   ["stay","v.","停留、暫住","We stayed at a hotel near the beach."],
+   ["movie","n.","電影","Let's watch a movie tonight."],
+   ["delicious","adj.","美味的","Mom's dumplings are delicious."],
+   ["explore","v.","探索","The kids explored the old street."],
+   ["local","adj.","當地的","Try the local food when you travel."],
+   ["hidden","adj.","隱藏的","There is a hidden door behind the shelf."],
+   ["suggest","v.","建議","The teacher suggested a good book."],
+   ["secret","adj.","祕密的","This is my secret place to read."],
+   ["line up","phr.","排隊","Please line up for lunch."]],
+  grammar:{name:"未來式 be going to",
+   intro:"說「已經計畫好、打算要做」的事，用 be going to＋原形動詞。例：He is going to explore Taiwan.",
+   task:"用 be going to 寫一句你這個週末要做的事，例如：I am going to visit my grandma.",
+   cols:[
+    [{h:"1. 句型：主詞＋be 動詞＋going to＋原形動詞",head:["主詞","be 動詞","例句"],rows:[["I","am","I am going to eat noodles."],["He / She / It","is","He is going to explore Taiwan."],["We / You / They","are","They are going to ask local people."]]},
+     {h:"3. 常搭配的時間詞",p:"tomorrow、tonight、this weekend、next week、next time"}],
+    [{h:"2. 否定句和問句",rows:[["否定：be 後面加 not","He is not going to stay at home."],["問句：be 動詞放句首","Are you going to try beef noodles?"],["簡答","Yes, I am. / No, I'm not."]]},
+     {h:"4. 新聞裡的 be going to",p:"He <b>is going to</b> explore Taiwan with his team.<br>They <b>are going to</b> ask local people.<br>More fans <b>are going to</b> line up at these shops."}]]},
+  quiz:[
+   {k:"sec",t:"A. Reading — True or False"},
+   {k:"mc",t:"Siwon is making a movie in Kaohsiung.",o:["True","False"],a:0},
+   {k:"mc",t:"The beef noodle shop is new.",o:["True","False"],a:1,why:"It is more than 40 years old."},
+   {k:"mc",t:"Siwon wrote his post in Chinese.",o:["True","False"],a:0},
+   {k:"mc",t:"The mayor did not like Siwon's post.",o:["True","False"],a:1,why:"He said Siwon really knows good food."},
+   {k:"sec",t:"B. Vocabulary — Choose the word"},
+   {k:"sel",t:"This cake is ___. I want another piece!",o:["delicious","hidden","local"],a:0},
+   {k:"sel",t:"Please ___ at the door and wait for your turn.",o:["line up","explore","suggest"],a:0},
+   {k:"sel",t:"The treasure is ___ under the sand.",o:["hidden","movie","stay"],a:0},
+   {k:"sec",t:"C. Grammar — Use be going to"},
+   {k:"txt",t:"I ___ (visit) my grandma this weekend.",a:"am going to visit"},
+   {k:"txt",t:"She ___ (eat) beef noodles tonight.",a:"is going to eat"},
+   {k:"txt",t:"They ___ (play) basketball tomorrow.",a:"are going to play"},
+   {k:"txt",t:"He ___ (take) photos of the food.",a:"is going to take"},
+   {k:"sec",t:"D. Write"},
+   {k:"open",t:"What are you going to do this weekend? Write 2–3 sentences with \"be going to\"."}]},
+ sources:[["三立新聞網","https://www.setn.com/news/1938333"],["中時新聞網（牛肉麵）","https://www.chinatimes.com/realtimenews/20261112005244-260404"],["中時新聞網（網友反應）","https://www.chinatimes.com/realtimenews/20261123001448-260405"],["華視新聞網","https://news.cts.com.tw/cts/entertain/202611/202611133100805.html"],["四季線上 4gTV","https://www.4gtv.tv/article/2026111312000017"]]
+},
+{
  id:"2026-11-22-bts-kaohsiung-vlog",no:1,date:"2026-11-22",cat:"文化・娛樂",level:"國小高年級～國中",
  zh:{level:"國小高年級",edition:"中文・國小版",len:"約 450 字・閱讀約 4 分鐘",kicker:"文化・娛樂｜高雄",title:"一支手機影片，讓全世界看見高雄",
   deck:"BTS 成員柾國利用休息日逛高雄，親手拍下的影片在一天內被上千萬人看見。",
@@ -446,9 +545,80 @@ const ARTICLES=[{
  sources:[["中央社","https://www.cna.com.tw/news/amov/202611215002.aspx"],["NOWnews","https://www.nownews.com/news/6894220"],["Korea JoongAng Daily","https://www.koreajoongangdaily.com/entertainment/bts-to-kick-off-asian-leg-of-arirang-world-tour-as-kaohsiung-turns-purple/12980830"],["TVBS English","https://news.tvbs.com.tw/english/3099823"]]
 }];
 
+/* 每期的手繪插圖（依文章 id） */
+const ART={
+"2026-11-23-siwon-kaohsiung-food":`<svg viewBox="0 0 400 300">
+<defs><linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6e3c4"/><stop offset="1" stop-color="#eccb9a"/></linearGradient>
+<linearGradient id="soup" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8662b"/><stop offset="1" stop-color="#8f3e16"/></linearGradient></defs>
+<rect width="400" height="300" fill="url(#wall)"/>
+<rect x="24" y="20" width="150" height="96" rx="6" fill="#9fd0ee" stroke="#3a2418" stroke-width="3"/>
+<path d="M24 92 Q60 84 96 92 T174 92 L174 116 L24 116 Z" fill="#4f8fc4"/>
+<path d="M118 92 L118 40 L124 30 L130 40 L130 92 Z" fill="#6a7a8c" stroke="#3a2418" stroke-width="2"/>
+<rect x="60" y="66" width="22" height="26" fill="#8494a6" stroke="#3a2418" stroke-width="2"/>
+<path d="M99 20 L99 116 M24 68 L174 68" stroke="#3a2418" stroke-width="3"/>
+<g transform="translate(214 24)"><rect width="150" height="70" rx="4" fill="#c8102e" stroke="#3a2418" stroke-width="3"/>
+<text x="75" y="31" font-family="Noto Serif TC,serif" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">牛肉麵</text>
+<text x="75" y="55" font-family="Noto Serif TC,serif" font-size="13" fill="#ffe9a8" text-anchor="middle">四十年老店</text></g>
+<rect x="0" y="190" width="400" height="110" fill="#b5793f"/>
+<path d="M0 190 L400 190" stroke="#3a2418" stroke-width="4"/>
+<g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".75">
+<path class="glow" d="M130 150 Q120 132 132 116 Q144 100 134 84"/>
+<path class="glow" d="M160 146 Q150 128 162 112 Q174 96 164 80"/>
+<path class="glow" d="M190 150 Q180 132 192 116 Q204 100 194 84"/></g>
+<ellipse cx="162" cy="190" rx="92" ry="20" fill="url(#soup)" stroke="#3a2418" stroke-width="3"/>
+<g stroke="#f7e2a8" stroke-width="4" stroke-linecap="round" fill="none"><path d="M100 190 Q130 180 160 192 T224 186"/><path d="M110 196 Q140 186 170 198 T218 194"/></g>
+<g fill="#6b3a1e" stroke="#3a2418" stroke-width="2"><rect x="120" y="176" width="26" height="16" rx="5"/><rect x="170" y="174" width="28" height="17" rx="5"/></g>
+<g fill="#5aa64a"><circle cx="152" cy="182" r="4"/><circle cx="160" cy="186" r="3"/><circle cx="206" cy="186" r="4"/></g>
+<path d="M70 190 Q72 252 162 256 Q252 252 254 190 Z" fill="#fff" stroke="#3a2418" stroke-width="3"/>
+<path d="M90 214 Q162 232 234 214" fill="none" stroke="#2f7fc1" stroke-width="5"/>
+<g stroke="#5a3a1e" stroke-width="6" stroke-linecap="round"><path d="M218 132 L276 196"/><path d="M234 126 L284 188"/></g>
+<ellipse cx="318" cy="250" rx="58" ry="18" fill="#fff" stroke="#3a2418" stroke-width="3"/>
+<rect x="290" y="226" width="56" height="22" rx="4" fill="#fbf6ea" stroke="#3a2418" stroke-width="2"/>
+<g fill="#3d3a2c" stroke="#3a2418" stroke-width="1.5"><path d="M296 222 Q306 210 316 222 Z"/><path d="M320 222 Q330 210 340 222 Z"/></g>
+<g fill="#e9a531"><circle cx="306" cy="224" r="3"/><circle cx="330" cy="224" r="3"/></g>
+<g fill="#5aa64a"><circle cx="300" cy="232" r="2"/><circle cx="312" cy="230" r="2"/><circle cx="336" cy="232" r="2"/></g>
+<g transform="rotate(10 46 240)"><rect x="18" y="196" width="56" height="92" rx="10" fill="#1b1b1b" stroke="#fff" stroke-width="3"/>
+<rect x="24" y="206" width="44" height="68" rx="4" fill="#ffe9c7"/>
+<circle cx="46" cy="240" r="13" fill="none" stroke="#c8102e" stroke-width="3"/><circle cx="46" cy="240" r="5" fill="#c8102e"/></g>
+</svg>`,
+"2026-11-22-bts-kaohsiung-vlog":`<svg viewBox="0 0 400 300">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e2258"/><stop offset="1" stop-color="#a27ed6"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b8fd1"/><stop offset="1" stop-color="#244c86"/></linearGradient></defs>
+<rect width="400" height="300" fill="url(#sky)"/>
+<g fill="#fff" opacity=".8"><circle cx="40" cy="30" r="1.6"/><circle cx="120" cy="50" r="1.2"/><circle cx="300" cy="24" r="1.8"/><circle cx="360" cy="70" r="1.2"/><circle cx="220" cy="30" r="1.2"/></g>
+<circle cx="330" cy="58" r="20" fill="#fff4d6"/>
+<ellipse class="glow" cx="170" cy="120" rx="70" ry="90" fill="#d9b8ff" opacity=".5"/>
+<path d="M150 210 L150 92 Q150 70 162 64 L162 42 L178 42 L178 64 Q190 70 190 92 L190 210 Z" fill="#5a3f9e" stroke="#1d1538" stroke-width="3" stroke-linejoin="round"/>
+<path d="M162 100 L178 100 M162 125 L178 125 M162 150 L178 150 M162 175 L178 175" stroke="#e2c9ff" stroke-width="5" stroke-linecap="round"/>
+<rect x="90" y="150" width="46" height="60" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
+<rect x="202" y="140" width="40" height="70" rx="4" fill="#6b52b3" stroke="#1d1538" stroke-width="3"/>
+<rect x="250" y="168" width="54" height="42" rx="4" fill="#7c63c4" stroke="#1d1538" stroke-width="3"/>
+<g fill="#ffe9a8"><rect x="100" y="162" width="8" height="8" rx="2"/><rect x="118" y="178" width="8" height="8" rx="2"/><rect x="212" y="154" width="8" height="8" rx="2"/><rect x="224" y="178" width="8" height="8" rx="2"/><rect x="262" y="180" width="8" height="8" rx="2"/><rect x="282" y="180" width="8" height="8" rx="2"/></g>
+<rect x="0" y="206" width="400" height="8" fill="#1d1538"/>
+<rect x="20" y="182" width="120" height="26" rx="12" fill="#f4f1ea" stroke="#1d1538" stroke-width="3"/>
+<rect x="20" y="194" width="120" height="5" fill="#7ac27f"/>
+<g fill="#8fc3ef" stroke="#1d1538" stroke-width="2"><rect x="32" y="186" width="18" height="9" rx="2"/><rect x="58" y="186" width="18" height="9" rx="2"/><rect x="84" y="186" width="18" height="9" rx="2"/><rect x="110" y="186" width="18" height="9" rx="2"/></g>
+<rect x="0" y="214" width="400" height="86" fill="url(#sea)"/>
+<path d="M0 236 Q25 228 50 236 T100 236 T150 236 T200 236 T250 236 T300 236 T350 236 T400 236" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".7"/>
+<path d="M0 262 Q25 254 50 262 T100 262 T150 262 T200 262 T250 262 T300 262 T350 262 T400 262" fill="none" stroke="#bfe0ff" stroke-width="3" opacity=".5"/>
+<path d="M150 236 L190 236 L184 296 L156 296 Z" fill="#c7a6ff" opacity=".25"/>
+<g transform="rotate(-8 330 220)">
+<rect x="292" y="150" width="80" height="140" rx="14" fill="#1b1b1b" stroke="#fff" stroke-width="3"/>
+<rect x="300" y="164" width="64" height="104" rx="6" fill="#f1ecfc"/>
+<path d="M300 240 L320 214 L336 230 L350 210 L364 232 L364 268 L300 268 Z" fill="#a98ae6"/>
+<circle cx="344" cy="186" r="9" fill="#fff4d6"/>
+<circle cx="310" cy="174" r="4" fill="#c8102e"/>
+</g>
+</svg>`,
+};
+
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const A=ARTICLES[0];
+/* 首頁顯示最新一期（ARTICLES[0]）；往期用 ?a=文章id 打開 */
+const LATEST=ARTICLES[0];
+const A=(()=>{let id=null;try{id=new URLSearchParams(location.search).get("a")}catch(e){}return ARTICLES.find(x=>x.id===id)||LATEST})();
+const NUM=["零","一","兩","三","四","五","六"];
+const LANGS={zh:"中文・國小",zhj:"中文・國中",en:"英文"};
 const WEEK="日一二三四五六";
 const dateZh=d=>{const t=new Date(d+"T00:00:00");return `${t.getFullYear()} 年 ${t.getMonth()+1} 月 ${t.getDate()} 日 星期${WEEK[t.getDay()]}`};
 let lang="zh";try{lang=localStorage.getItem("dr-lang")||"zh"}catch(e){}
@@ -506,13 +676,27 @@ function loadScript(src){return new Promise((ok,no)=>{const s=document.createEle
 function tip(w){const h=A[lang].words.find(x=>strip(x[0])===strip(w));return h?strip(h[2]):""}
 function bodyHtml(paras){return paras.map(p=>"<p>"+esc(p).replace(/\{([^}]+)\}/g,(m,w)=>{const t=tip(w);return t?`<mark title="${esc(t)}">${w}</mark>`:`<u>${w}</u>`})+"</p>").join("")}
 
+/* 文法專欄：新文章用 G.cols（兩欄，每欄若干小框）；第 1 期沿用舊格式自動轉換 */
+function gramCols(G){
+ if(G.cols)return G.cols;
+ return[[{h:"1. 規則動詞：加 -ed",rows:G.regular},{h:"3. 常搭配的時間詞",p:G.time}],
+  [{h:"2. 不規則動詞：要背起來",head:["原形","過去式","中文"],rows:G.irregular,bold:1}]];
+}
+function gramBox(b,i){
+ const st=i?' style="margin-top:14px"':"";
+ return `<h3${st}>${b.h}</h3>`+(b.p?`<p style="margin:0">${b.p}</p>`:"")+(b.rows?`<table>${b.head?`<thead><tr>${b.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead>`:""}<tbody>${
+  b.rows.map(r=>`<tr>${r.map((c,j)=>`<td>${j===b.bold?`<b>${c}</b>`:c}</td>`).join("")}</tr>`).join("")}</tbody></table>`:"");
+}
+
 function render(){
  const L=view(A[lang]),zh=lang!=="en";
  document.documentElement.lang=zh?"zh-Hant":"en";
  document.body.dataset.lang=lang;document.body.classList.toggle("bpmf",bpmf);
  $("bpmfBtn").hidden=!zh;$("bpmfBtn").setAttribute("aria-pressed",bpmf);
  $("bZh").setAttribute("aria-pressed",lang==="zh");$("bZj").setAttribute("aria-pressed",lang==="zhj");$("bEn").setAttribute("aria-pressed",lang==="en");
- $("issue").textContent=`第 ${A.no} 期・${dateZh(A.date)}`;
+ $("issue").innerHTML=`第 ${A.no} 期・${dateZh(A.date)}`+(A===LATEST?"":`　<a href="./" style="color:var(--red)">← 回到最新一期</a>`);
+ $("photo").innerHTML=ART[A.id]||"";
+ $("navStory").textContent=A===LATEST?"今日頭條":"本期文章";
  $("kicker").textContent=L.kicker;$("title").textContent=L.title;$("deck").textContent=L.deck;
  $("byline").innerHTML=`<span>文／酥酥老師改寫</span><span>${L.edition}</span><span>適讀：${L.level}</span><span>${L.len}</span>`;
  $("body").className="cols"+(zh?"":" en");$("body").innerHTML=bodyHtml(L.body);
@@ -523,15 +707,11 @@ function render(){
   ?`<div class="entry"><b>${w[0]}</b><span class="zy">${w[1]}</span><p>${w[2]}</p><p class="ex">例：${w[3]}</p></div>`
   :`<div class="entry"><b>${w[0]}</b><span class="pos">${w[1]}</span><p>${w[2]}</p><p class="ex">${esc(w[3])}</p></div>`).join("");
  if(zh){
-  $("extra").innerHTML=`<h2>成語小教室 <span>三個成語都能用來描述今天的新聞</span></h2><p class="sub"></p><div class="idioms">${
+  $("extra").innerHTML=`<h2>成語小教室 <span>${NUM[L.idioms.length]}個成語都能用來描述這則新聞</span></h2><p class="sub"></p><div class="idioms">${
    L.idioms.map(r=>`<div class="idiom"><h3>${r[0]}</h3><dl><dt>意思</dt><dd>${r[1]}</dd><dt>新聞裡</dt><dd>${r[2]}</dd><dt>造句</dt><dd>${r[3]}</dd></dl></div>`).join("")}</div>`;
  }else{
   const G=L.grammar;
-  $("extra").innerHTML=`<h2>文法專欄 <span>${G.name}</span></h2><p class="sub">${G.intro}</p><div class="gram">
-   <div class="box"><h3>1. 規則動詞：加 -ed</h3><table><tbody>${G.regular.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</tbody></table>
-   <h3 style="margin-top:14px">3. 常搭配的時間詞</h3><p style="margin:0">${G.time}</p></div>
-   <div class="box"><h3>2. 不規則動詞：要背起來</h3><table><thead><tr><th>原形</th><th>過去式</th><th>中文</th></tr></thead><tbody>${
-    G.irregular.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div></div>`;
+  $("extra").innerHTML=`<h2>文法專欄 <span>${G.name}</span></h2><p class="sub">${G.intro}</p><div class="gram">${gramCols(G).map(col=>`<div class="box">${col.map(gramBox).join("")}</div>`).join("")}</div>`;
  }
  $("pH").innerHTML=zh?"練習題 <span>寫完按「對答案」</span>":"Exercises <span>寫完按「對答案」</span>";
  $("pSub").textContent=Store.user?`${Store.user.name}，答完後成績會自動記錄。`:"登入後，答題成績會自動記錄在「我的成績」。";
@@ -545,7 +725,7 @@ function render(){
   if(q.k==="open")b=`<textarea id="q${i}" aria-label="寫下你的想法" placeholder="${zh?"這題沒有標準答案，寫下你的想法":"Write your answer here"}"></textarea>`;
   return `<div class="q" id="box${i}"><p class="t">${i+1}. ${esc(q.t)}</p>${b}<div class="fb" id="fb${i}"></div></div>`;
  }).join("")+`<div class="actions"><button class="btn" type="submit">對答案</button><button class="btn ghost" type="button" id="reset">重新作答</button><span class="score" id="score" aria-live="polite"></span></div>`;
- $("pastList").innerHTML=ARTICLES.map(a=>`<a href="#story"><small>第 ${a.no} 期・${a.date.replace(/-/g,"/")}・${a.cat}</small><b>${esc(strip(a.zh.title))}</b><small>${esc(a.en.title)}</small></a>`).join("");
+ $("pastList").innerHTML=ARTICLES.map(a=>`<a href="${a===LATEST?"./":"?a="+encodeURIComponent(a.id)}#story"${a===A?' aria-current="page"':""}><small>第 ${a.no} 期・${a.date.replace(/-/g,"/")}・${a.cat}${a===A?"・<span style=\"color:var(--red)\">正在讀</span>":""}</small><b>${esc(strip(a.zh.title))}</b><small>${esc(a.en.title)}</small></a>`).join("");
  $("src").innerHTML="本期文章依下列報導改寫，未照搬原文："+A.sources.map(s=>`<a href="${s[1]}">${esc(s[0])}</a>`).join("、");
  renderUser();buildPrint();
 }
@@ -557,13 +737,14 @@ function renderUser(){
  $("scoreMode").textContent=Store.cloud?"・雲端紀錄":"・存在這台裝置";
  renderScores();
 }
+function issueNo(r){if(r.no)return r.no;const a=ARTICLES.find(x=>x.id===r.article);return a?a.no:0}
 async function renderScores(){
  if(!Store.user){$("scoreSub").textContent="";$("scoreList").innerHTML=`<p class="empty">還沒登入。按右上角「學生登入」，答題成績就會記錄在這裡。</p>`;return}
  $("scoreSub").textContent=Store.cloud?"老師也看得到你的成績。":"目前成績只存在這台裝置；換裝置或清除瀏覽紀錄後會不見。";
  let rows=[];try{rows=await Store.list()}catch(e){$("scoreList").innerHTML=`<p class="empty">成績暫時讀不到，請稍後再試。</p>`;return}
  if(!rows.length){$("scoreList").innerHTML=`<p class="empty">還沒有紀錄。完成今天的練習題，按「對答案」就會出現。</p>`;return}
- $("scoreList").innerHTML=`<table><thead><tr><th>日期</th><th>文章</th><th>版本</th><th style="text-align:right">分數</th></tr></thead><tbody>${
-  rows.map(r=>`<tr><td style="white-space:nowrap">${esc(r.at.slice(0,10).replace(/-/g,"/"))}</td><td>${esc(r.title)}</td><td style="white-space:nowrap">${({zh:"中文・國小",zhj:"中文・國中",en:"英文"})[r.lang]||r.lang}</td><td style="text-align:right;white-space:nowrap">${r.right} / ${r.total}</td></tr>`).join("")}</tbody></table>`;
+ $("scoreList").innerHTML=`<table><thead><tr><th>日期</th><th>期數</th><th>文章</th><th>版本</th><th style="text-align:right">分數</th></tr></thead><tbody>${
+  rows.map(r=>`<tr><td style="white-space:nowrap">${esc(r.at.slice(0,10).replace(/-/g,"/"))}</td><td style="white-space:nowrap">${issueNo(r)?`<a href="?a=${encodeURIComponent(r.article)}#story">第 ${issueNo(r)} 期</a>`:"—"}</td><td>${esc(r.title)}</td><td style="white-space:nowrap">${LANGS[r.lang]||r.lang}</td><td style="text-align:right;white-space:nowrap">${r.right} / ${r.total}</td></tr>`).join("")}</tbody></table>`;
 }
 
 /* ---------- printable sheet ---------- */
@@ -572,7 +753,7 @@ function buildPrint(){
  const mast=`<div class="pm"><div class="no">第 ${A.no} 期</div><div><h1>酥酥老師每日讀報</h1></div><div class="ed">${dateZh(A.date)}<br>適讀：${L.level}</div></div>
   <div class="strip2"><span>給國小、國中生的時事報・每天一篇</span><span>${L.edition}</span></div>`;
  const foot=p=>`<div class="ft"><span>酥酥老師每日讀報｜IG、Threads @crispyyyyy0121</span><span>${p} / ${pages}</span></div>`;
- const svg=document.querySelector(".photo svg").outerHTML.replace(/id="sky"/,'id="psky"').replace(/url\(#sky\)/,"url(#psky)").replace(/id="sea"/,'id="psea"').replace(/url\(#sea\)/,"url(#psea)").replace(/ class="glow"/,"");
+ const svg=(ART[A.id]||"").replace(/id="([^"]+)"/g,'id="p$1"').replace(/url\(#([^)]+)\)/g,"url(#p$1)").replace(/ class="glow"/g,"");
  const think=zh?"讀完後，用三句話把這則新聞說給家人聽。":"Tell your family about this news in three sentences.";
  const p1=`<section class="pg">${mast}
   <span class="kick">${esc(L.kicker)}</span>
@@ -592,10 +773,8 @@ function buildPrint(){
  }else{
   const G=L.grammar;
   extra=`<div class="sh red"><span>文法專欄：${G.name}</span><i></i></div><p style="margin:0 0 6px">${G.intro}</p>
-   <div class="gt"><div class="gb"><h3>1. 規則動詞：加 -ed</h3><table><tbody>${G.regular.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</tbody></table>
-    <h3 style="margin-top:12px">3. 常搭配的時間詞</h3><p style="margin:0;font-size:13px">${G.time}</p></div>
-   <div class="gb"><h3>2. 不規則動詞：要背起來</h3><table><thead><tr><th>原形</th><th>過去式</th><th>中文</th></tr></thead><tbody>${G.irregular.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div></div>
-   <div class="think hand" style="margin-top:12px"><b>換你寫：</b>用過去式寫一句你昨天做的事。<div class="ln"></div><div class="ln"></div></div>`;
+   <div class="gt">${gramCols(G).map(col=>`<div class="gb">${col.map(gramBox).join("")}</div>`).join("")}</div>
+   <div class="think hand" style="margin-top:12px"><b>換你寫：</b>${G.task||"用過去式寫一句你昨天做的事。"}<div class="ln"></div><div class="ln"></div></div>`;
  }
  const p2=`<section class="pg">${mast}<div data-flow><div class="sh"><span>${zh?"生詞欄":"Word Bank"}</span><i></i></div><div class="vg${zh?"":" e3"}">${vocab}</div>${extra}</div>${foot(2)}</section>`;
  let n=0;
@@ -693,7 +872,7 @@ $("quiz").addEventListener("submit",async e=>{
  });
  $("score").textContent=`${right} / ${total} 題答對`;
  if(Store.user){
-  try{await Store.save({article:A.id,title:strip(A[lang].title),lang,right,total});$("score").textContent+="・已記錄";renderScores()}
+  try{await Store.save({article:A.id,no:A.no,title:strip(A[lang].title),lang,right,total});$("score").textContent+="・已記錄";renderScores()}
   catch(err){$("score").textContent+="・這次沒記錄到"}
  }else $("score").textContent+="・登入後可記錄成績";
 });
